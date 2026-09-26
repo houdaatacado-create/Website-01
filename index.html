@@ -1,0 +1,2756 @@
+<!DOCTYPE html><html lang="en" id="html-root"><head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+
+  <!-- ============================================================
+       GLOBAL WEBSITE MASTER — SEO META (dynamically overwritten per route)
+       ============================================================ -->
+  <title id="page-title">GlobalWebsiteMaster — Reusable Website Factory</title>
+  <meta id="meta-description" name="description" content="GlobalWebsiteMaster is a production-quality, fully configurable website architecture ready for any brand, product or content platform."/>
+  <meta id="meta-robots" name="robots" content="index, follow"/>
+  <link id="canonical" rel="canonical" href="https://www.yoursite.com/"/>
+
+  <!-- Open Graph -->
+  <meta id="og-title" property="og:title" content="GlobalWebsiteMaster"/>
+  <meta id="og-description" property="og:description" content="Production-quality reusable website factory."/>
+  <meta id="og-url" property="og:url" content="https://www.yoursite.com/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="GlobalWebsiteMaster"/>
+  <meta id="og-image" property="og:image" content="https://cdn-ai.onspace.ai/onspace/project/screenshot/online/pre-site/9bk1mi.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta id="tw-title" name="twitter:title" content="GlobalWebsiteMaster"/>
+  <meta id="tw-description" name="twitter:description" content="Production-quality reusable website factory."/>
+  <meta id="tw-image" name="twitter:image" content="https://cdn-ai.onspace.ai/onspace/project/screenshot/online/pre-site/9bk1mi.jpg"/>
+  <meta name="twitter:url" content="https://www.yoursite.com/"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['Inter', 'system-ui', 'sans-serif'],
+            heading: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            primary:   { DEFAULT:'var(--color-primary)',   light:'var(--color-primary-light)',   dark:'var(--color-primary-dark)' },
+            secondary: { DEFAULT:'var(--color-secondary)', light:'var(--color-secondary-light)', dark:'var(--color-secondary-dark)' },
+            accent:    { DEFAULT:'var(--color-accent)',    light:'var(--color-accent-light)',    dark:'var(--color-accent-dark)' },
+            surface:   { DEFAULT:'var(--color-surface)',   alt:'var(--color-surface-alt)' },
+            border:    { DEFAULT:'var(--color-border)' },
+            muted:     { DEFAULT:'var(--color-muted)' },
+          },
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — change here to rebrand an entire site
+       ============================================================ */
+    :root {
+      /* Brand colours */
+      --color-primary:         #6366f1;
+      --color-primary-light:   #818cf8;
+      --color-primary-dark:    #4f46e5;
+      --color-secondary:       #06b6d4;
+      --color-secondary-light: #67e8f9;
+      --color-secondary-dark:  #0891b2;
+      --color-accent:          #f59e0b;
+      --color-accent-light:    #fcd34d;
+      --color-accent-dark:     #d97706;
+
+      /* Surfaces */
+      --color-bg:              #0f172a;
+      --color-surface:         #1e293b;
+      --color-surface-alt:     #334155;
+      --color-border:          #334155;
+
+      /* Text */
+      --color-text:            #f1f5f9;
+      --color-muted:           #94a3b8;
+
+      /* Status */
+      --color-success:         #22c55e;
+      --color-warning:         #f59e0b;
+      --color-error:           #ef4444;
+
+      /* Radius */
+      --radius-sm:   6px;
+      --radius-md:   10px;
+      --radius-lg:   16px;
+      --radius-xl:   24px;
+      --radius-full: 9999px;
+
+      /* Shadows */
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.4);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.4);
+      --shadow-lg:  0 8px 32px rgba(0,0,0,.5);
+      --shadow-glow:0 0 40px rgba(99,102,241,.25);
+    }
+
+    /* Base */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    h1,h2,h3,h4,h5,h6 { font-family: 'Space Grotesk', sans-serif; line-height: 1.25; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--color-surface); }
+    ::-webkit-scrollbar-thumb { background: var(--color-surface-alt); border-radius: 3px; }
+
+    /* Glow helper */
+    .glow { box-shadow: var(--shadow-glow); }
+    .glow-text { text-shadow: 0 0 30px rgba(99,102,241,.5); }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Glassmorphism card */
+    .glass {
+      background: rgba(30,41,59,.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.07);
+    }
+
+    /* Animated gradient border */
+    .border-gradient {
+      position: relative;
+      border: 1px solid transparent;
+      background-clip: padding-box;
+    }
+    .border-gradient::before {
+      content:'';
+      position:absolute;
+      inset:-1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      z-index:-1;
+    }
+
+    /* Page transitions */
+    .page-enter { animation: fadeIn .25s ease; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+    /* Skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, var(--color-surface) 25%, var(--color-surface-alt) 50%, var(--color-surface) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: var(--radius-sm);
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* Safe area for mobile bottom nav */
+    .safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0); }
+
+    /* Video card aspect ratio */
+    .aspect-video-card { aspect-ratio: 9/16; }
+    .aspect-16-9 { aspect-ratio: 16/9; }
+
+    /* Hidden helper */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* Toast */
+    #toast-container { position:fixed; bottom:80px; left:50%; transform:translateX(-50%); z-index:9999; pointer-events:none; }
+
+    /* Modal */
+    .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.7); backdrop-filter:blur(4px); z-index:1000; display:flex; align-items:center; justify-content:center; padding:1rem; }
+    .modal-box { background: var(--color-surface); border-radius: var(--radius-lg); border:1px solid var(--color-border); max-width:600px; width:100%; max-height:90vh; overflow-y:auto; }
+
+    /* Admin sidebar */
+    .admin-sidebar { background: var(--color-surface); border-right:1px solid var(--color-border); }
+
+    /* Announcement bar */
+    .announcement-bar { background: linear-gradient(90deg, var(--color-primary-dark), var(--color-secondary-dark)); }
+
+    /* Hero */
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,.25) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(6,182,212,.15) 0%, transparent 50%),
+        var(--color-bg);
+    }
+
+    /* Section divider */
+    .section-divider { border-color: var(--color-border); }
+
+    /* Card hover */
+    .card-hover { transition: transform .2s ease, box-shadow .2s ease; cursor: pointer; }
+    .card-hover:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+    /* Nav active */
+    .nav-active { color: var(--color-primary-light) !important; }
+    .nav-active-bg { background: rgba(99,102,241,.15) !important; border-color: rgba(99,102,241,.3) !important; }
+
+    /* Bottom nav */
+    .bottom-nav-item { display:flex; flex-direction:column; align-items:center; gap:2px; font-size:.65rem; font-weight:500; color: var(--color-muted); transition: color .2s; flex:1; padding:.6rem 0; }
+    .bottom-nav-item.active { color: var(--color-primary-light); }
+    .bottom-nav-item i { font-size:1.2rem; }
+
+    /* Search */
+    .search-input { background:var(--color-surface); border:1px solid var(--color-border); color:var(--color-text); border-radius:var(--radius-full); padding:.65rem 1.25rem .65rem 3rem; width:100%; outline:none; transition:border-color .2s; }
+    .search-input:focus { border-color: var(--color-primary); }
+
+    /* Badge */
+    .badge { display:inline-flex; align-items:center; padding:.2rem .65rem; border-radius:var(--radius-full); font-size:.72rem; font-weight:600; letter-spacing:.03em; }
+    .badge-primary { background:rgba(99,102,241,.2); color: var(--color-primary-light); }
+    .badge-secondary { background:rgba(6,182,212,.2); color: var(--color-secondary-light); }
+    .badge-accent { background:rgba(245,158,11,.2); color: var(--color-accent-light); }
+    .badge-success { background:rgba(34,197,94,.2); color:#4ade80; }
+    .badge-muted { background:var(--color-surface-alt); color:var(--color-muted); }
+
+    /* Button base */
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.65rem 1.5rem; border-radius:var(--radius-md); font-weight:600; font-size:.9rem; transition: all .2s; cursor:pointer; border:none; text-decoration:none; white-space:nowrap; }
+    .btn-primary { background: var(--color-primary); color:#fff; }
+    .btn-primary:hover { background: var(--color-primary-dark); transform:translateY(-1px); box-shadow: var(--shadow-glow); }
+    .btn-secondary { background: var(--color-surface-alt); color: var(--color-text); border:1px solid var(--color-border); }
+    .btn-secondary:hover { background: var(--color-surface); border-color:var(--color-primary); }
+    .btn-outline { background:transparent; color: var(--color-primary-light); border:1px solid var(--color-primary); }
+    .btn-outline:hover { background: rgba(99,102,241,.1); }
+    .btn-ghost { background:transparent; color:var(--color-muted); border:none; padding:.5rem .75rem; }
+    .btn-ghost:hover { color: var(--color-text); background: var(--color-surface-alt); }
+    .btn-sm { padding:.4rem 1rem; font-size:.8rem; }
+    .btn-lg { padding:.85rem 2rem; font-size:1rem; }
+
+    /* Forms */
+    .form-input, .form-select, .form-textarea {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      border-radius: var(--radius-md);
+      padding: .6rem 1rem;
+      width:100%;
+      outline:none;
+      transition:border-color .2s;
+      font-family:inherit;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(99,102,241,.15);
+    }
+    .form-textarea { resize:vertical; min-height:120px; }
+    label.form-label { display:block; font-size:.85rem; font-weight:600; margin-bottom:.35rem; color:var(--color-muted); }
+
+    /* Stats counter animation */
+    .stat-value { font-family:'Space Grotesk',sans-serif; font-size:2.5rem; font-weight:800; }
+
+    /* TOC */
+    .toc-link { color: var(--color-muted); text-decoration:none; font-size:.85rem; transition:color .2s; display:block; padding:.2rem 0; }
+    .toc-link:hover, .toc-link.active { color: var(--color-primary-light); }
+
+    /* Pagination */
+    .page-btn { width:36px; height:36px; display:flex; align-items:center; justify-content:center; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-muted); cursor:pointer; transition: all .2s; font-size:.85rem; }
+    .page-btn:hover, .page-btn.active { background:var(--color-primary); border-color:var(--color-primary); color:#fff; }
+
+    /* Code block */
+    pre { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:1rem; overflow-x:auto; font-size:.83rem; line-height:1.6; }
+    code { font-family:'Fira Code','Consolas',monospace; color: var(--color-secondary-light); }
+
+    /* Article body */
+    .article-body h2 { font-size:1.5rem; font-weight:700; margin:2rem 0 .75rem; color:var(--color-text); }
+    .article-body h3 { font-size:1.2rem; font-weight:600; margin:1.5rem 0 .5rem; color:var(--color-text); }
+    .article-body p  { margin-bottom:1.1rem; color:#cbd5e1; }
+    .article-body ul,
+    .article-body ol { margin-bottom:1.1rem; padding-left:1.5rem; color:#cbd5e1; }
+    .article-body li { margin-bottom:.4rem; }
+    .article-body blockquote { border-left:3px solid var(--color-primary); padding-left:1rem; margin:1.5rem 0; color:var(--color-muted); font-style:italic; }
+
+    /* Reels vertical */
+    .reel-container { scroll-snap-type:y mandatory; overflow-y:scroll; height:calc(100vh - 120px); }
+    .reel-item { scroll-snap-align:start; height:calc(100vh - 120px); position:relative; }
+
+    /* Admin table */
+    .admin-table { width:100%; border-collapse:collapse; }
+    .admin-table th { text-align:left; padding:.75rem 1rem; font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--color-muted); border-bottom:1px solid var(--color-border); }
+    .admin-table td { padding:.75rem 1rem; font-size:.875rem; border-bottom:1px solid rgba(51,65,85,.5); }
+    .admin-table tr:hover td { background:rgba(255,255,255,.02); }
+
+    /* Progress bar */
+    .progress-bar { height:6px; border-radius:var(--radius-full); background:var(--color-surface-alt); overflow:hidden; }
+    .progress-fill { height:100%; border-radius:var(--radius-full); background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); transition:width .8s ease; }
+
+    /* Breadcrumb */
+    .breadcrumb-item + .breadcrumb-item::before { content:'›'; margin:0 .5rem; color:var(--color-muted); }
+
+    /* FAQ */
+    .faq-item { border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden; }
+    .faq-answer { display:none; }
+    .faq-answer.open { display:block; }
+
+    /* Footer */
+    .footer { background: var(--color-surface); border-top:1px solid var(--color-border); }
+
+    /* Announcement bar close */
+    #announcement-bar { display:flex; }
+
+    /* Mobile menu */
+    #mobile-menu { display:none; position:fixed; inset:0; z-index:500; background:var(--color-bg); overflow-y:auto; }
+    #mobile-menu.open { display:flex; flex-direction:column; }
+
+    /* Responsive table wrapper */
+    .table-wrapper { overflow-x:auto; }
+
+    @media (max-width:768px) {
+      .stat-value { font-size:1.8rem; }
+    }
+  </style>
+
+  <!-- ============================================================
+       JSON-LD — Organization (base, overridden per page)
+       ============================================================ -->
+  <script type="application/ld+json" id="jsonld-org">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"GlobalWebsiteMaster",
+    "url":"https://www.yoursite.com",
+    "logo":"https://www.yoursite.com/logo.png",
+    "sameAs":[]
+  }
+  </script>
+  <script type="application/ld+json" id="jsonld-website">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"GlobalWebsiteMaster",
+    "url":"https://www.yoursite.com",
+    "potentialAction":{
+      "@type":"SearchAction",
+      "target":"https://www.yoursite.com/search?q={search_term_string}",
+      "query-input":"required name=search_term_string"
+    }
+  }
+  </script>
+</head>
+
+<body class="dark">
+
+<!-- ============================================================
+     ANNOUNCEMENT BAR
+     ============================================================ -->
+<div id="announcement-bar" class="announcement-bar text-white text-xs sm:text-sm py-2 px-4 text-center justify-between items-center gap-2">
+  <span class="flex-1 text-center" id="announcement-text">🚀 GlobalWebsiteMaster v1.0 — Your reusable website factory is ready.</span>
+  <button onclick="document.getElementById(&#39;announcement-bar&#39;).style.display=&#39;none&#39;" class="ml-2 opacity-70 hover:opacity-100 transition-opacity shrink-0" aria-label="Close announcement"><i class="fa-solid fa-xmark"></i></button>
+</div>
+
+<!-- ============================================================
+     HEADER / DESKTOP NAV
+     ============================================================ -->
+<header id="site-header" class="sticky top-0 z-400 glass border-b" style="border-color:var(--color-border);z-index:400;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+    <!-- Logo -->
+    <a href="#/" onclick="navigate(&#39;/&#39;)" class="flex items-center gap-2.5 shrink-0 group">
+      <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center" style="background:var(--color-primary);">
+        <span class="text-white font-heading font-bold text-sm" id="logo-mark">GW</span>
+      </div>
+      <span class="font-heading font-bold text-lg text-white hidden sm:block" id="nav-site-name">GlobalWebsiteMaster</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-1" id="desktop-nav" aria-label="Main navigation">
+      <!-- Rendered by renderDesktopNav() -->
+    </nav>
+
+    <!-- Right actions -->
+    <div class="flex items-center gap-2 shrink-0">
+      <!-- Search trigger -->
+      <button onclick="openSearch()" class="btn btn-ghost btn-sm hidden sm:flex" aria-label="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span class="text-xs text-muted hidden md:block">Search…</span>
+        <kbd class="hidden md:block text-xs bg-surface border border-border rounded px-1.5 py-0.5 text-muted ml-1">⌘K</kbd>
+      </button>
+      <!-- CTA -->
+      <button onclick="navigate(&#39;/contact&#39;)" class="btn btn-primary btn-sm hidden md:flex" id="header-cta">
+        Get Started
+      </button>
+      <!-- Mobile hamburger -->
+      <button onclick="toggleMobileMenu()" class="lg:hidden btn btn-ghost btn-sm" aria-label="Open menu">
+        <i class="fa-solid fa-bars text-lg"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     MOBILE MENU
+     ============================================================ -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <div class="flex items-center justify-between p-4 border-b" style="border-color:var(--color-border);">
+    <a onclick="navigate(&#39;/&#39;);closeMobileMenu();" class="flex items-center gap-2 cursor-pointer">
+      <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--color-primary);">
+        <span class="text-white font-heading font-bold text-sm" id="mobile-logo-mark">GW</span>
+      </div>
+      <span class="font-heading font-bold text-lg" id="mobile-site-name">GlobalWebsiteMaster</span>
+    </a>
+    <button onclick="closeMobileMenu()" class="btn btn-ghost" aria-label="Close menu"><i class="fa-solid fa-xmark text-xl"></i></button>
+  </div>
+  <div class="p-4 flex flex-col gap-1" id="mobile-nav-links"><!-- rendered --></div>
+  <div class="p-4 border-t mt-auto" style="border-color:var(--color-border);">
+    <button onclick="navigate(&#39;/contact&#39;);closeMobileMenu();" class="btn btn-primary w-full justify-center" id="mobile-cta">Get Started</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     SEARCH MODAL
+     ============================================================ -->
+<div id="search-modal" class="modal-overlay hidden" onclick="closeSearchOnBackdrop(event)">
+  <div class="modal-box w-full max-w-2xl" style="max-height:70vh;">
+    <div class="p-4 border-b" style="border-color:var(--color-border);">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-muted"></i>
+        <input id="search-input" class="search-input" placeholder="Search articles, content, videos…" oninput="liveSearch(this.value)" onkeydown="handleSearchKey(event)"/>
+        <button onclick="closeSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 btn btn-ghost btn-sm p-1"><kbd class="text-xs">ESC</kbd></button>
+      </div>
+    </div>
+    <div id="search-results" class="p-4 overflow-y-auto" style="max-height:55vh;"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOAST CONTAINER
+     ============================================================ -->
+<div id="toast-container"></div>
+
+<!-- ============================================================
+     MAIN CONTENT AREA — all pages render here
+     ============================================================ -->
+<main id="app-root" class="min-h-screen">
+  <div id="page-loading" class="flex flex-col items-center justify-center min-h-96 gap-4">
+    <div class="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin" style="border-color:var(--color-primary);border-top-color:transparent;"></div>
+    <p class="text-muted text-sm">Loading…</p>
+  </div>
+</main>
+
+<!-- ============================================================
+     MOBILE BOTTOM NAVIGATION
+     ============================================================ -->
+<nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 z-300 glass border-t safe-bottom lg:hidden" style="z-index:300;border-color:var(--color-border);">
+  <div class="flex" id="bottom-nav-items"><!-- rendered --></div>
+</nav>
+
+<!-- ============================================================
+     FOOTER — rendered at bottom of pages (not fixed)
+     ============================================================ -->
+<template id="footer-template">
+  <footer class="footer mt-16 mb-20 lg:mb-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div class="col-span-1 sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--color-primary);">
+              <span class="text-white font-heading font-bold text-sm footer-logo-mark"></span>
+            </div>
+            <span class="font-heading font-bold text-lg footer-site-name"></span>
+          </div>
+          <p class="text-muted text-sm mb-4 footer-tagline"></p>
+          <div class="flex gap-3 footer-socials"></div>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold text-sm mb-3 uppercase tracking-wider text-muted">Platform</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a onclick="navigate(&#39;/&#39;)" class="text-muted hover:text-white transition-colors cursor-pointer">Home</a></li>
+            <li><a onclick="navigate(&#39;/explore&#39;)" class="text-muted hover:text-white transition-colors cursor-pointer">Explore</a></li>
+            <li><a onclick="navigate(&#39;/videos&#39;)" class="text-muted hover:text-white transition-colors cursor-pointer">Videos</a></li>
+            <li><a onclick="navigate(&#39;/blog&#39;)" class="text-muted hover:text-white transition-colors cursor-pointer">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold text-sm mb-3 uppercase tracking-wider text-muted">Company</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a onclick="navigate(&#39;/about&#39;)" class="text-muted hover:text-white transition-colors cursor-pointer">About</a></li>
+            <li><a onclick="navigate(&#39;/contact&#39;)" class="text-muted hover:text-white transition-colors cursor-pointer">Contact</a></li>
+            <li><a onclick="navigate(&#39;/support&#39;)" class="text-muted hover:text-white transition-colors cursor-pointer">Support</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold text-sm mb-3 uppercase tracking-wider text-muted">Legal</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a onclick="navigate(&#39;/privacy&#39;)" class="text-muted hover:text-white transition-colors cursor-pointer">Privacy Policy</a></li>
+            <li><a onclick="navigate(&#39;/terms&#39;)" class="text-muted hover:text-white transition-colors cursor-pointer">Terms of Service</a></li>
+            <li><a onclick="navigate(&#39;/sitemap&#39;)" class="text-muted hover:text-white transition-colors cursor-pointer">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-muted" style="border-color:var(--color-border);">
+        <p class="footer-copyright"></p>
+        <p class="opacity-60">Built with GlobalWebsiteMaster</p>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<!-- ============================================================
+     JAVASCRIPT — ALL LOGIC
+     ============================================================ -->
+<script>
+/* ==============================================================
+   ██████╗  ██╗      ██████╗ ██████╗  █████╗ ██╗
+  ██╔════╝ ██║     ██╔═══██╗██╔══██╗██╔══██╗██║
+  ██║  ███╗██║     ██║   ██║██████╔╝███████║██║
+  ██║   ██║██║     ██║   ██║██╔══██╗██╔══██║██║
+  ╚██████╔╝███████╗╚██████╔╝██████╔╝██║  ██║███████╗
+   ╚═════╝ ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+
+  GLOBAL WEBSITE MASTER
+  ============================================================== */
+
+/* ==============================================================
+   1. CENTRAL SITE CONFIGURATION
+   ── Change these values to rebrand any future site ──
+   ============================================================== */
+const SITE = {
+  name:           'GlobalWebsiteMaster',
+  shortName:      'GWM',
+  logoMark:       'GW',
+  description:    'A production-quality, fully configurable website factory built once and deployed everywhere.',
+  tagline:        'Build once. Deploy everywhere.',
+  url:            'https://www.yoursite.com',
+  logo:           null,                    // URL to logo image
+  favicon:        null,                    // URL to favicon
+  primaryColor:   '#6366f1',
+  secondaryColor: '#06b6d4',
+  accentColor:    '#f59e0b',
+  bgColor:        '#0f172a',
+  contactEmail:   'hello@yoursite.com',
+  supportEmail:   'support@yoursite.com',
+  socialLinks: {
+    twitter:   'https://twitter.com/yourhandle',
+    github:    'https://github.com/yourorg',
+    linkedin:  'https://linkedin.com/company/yourorg',
+    youtube:   'https://youtube.com/@yourchannel',
+  },
+  defaultLanguage: 'en',
+  analyticsId:    '',                      // GA4 Measurement ID e.g. G-XXXXXXXXXX
+  companyInfo: {
+    name:     'Your Company, Inc.',
+    address:  'Your Address, City, Country',
+    founded:  '2024',
+  },
+  storeLinks: {
+    playStore: '',
+    appStore:  '',
+  },
+  headerCTA:      { label: 'Get Started', route: '/contact' },
+  copyright:      `© ${new Date().getFullYear()} Your Company, Inc. All rights reserved.`,
+};
+
+/* ==============================================================
+   2. FEATURE FLAGS
+   ── Enable/disable entire modules without code changes ──
+   ============================================================== */
+const FEATURES = {
+  blog:          true,
+  videos:        true,
+  search:        true,
+  newsletter:    true,
+  contact:       true,
+  analytics:     true,
+  bottomNav:     true,
+  multilingual:  false,
+  aiSearch:      false,
+  admin:         true,
+  announcements: true,
+  reels:         true,
+  about:         true,
+  support:       true,
+  legal:         true,
+  explore:       true,
+  categories:    true,
+  faq:           true,
+  seo_hubs:      true,
+  sitemap_page:  true,
+};
+
+/* ==============================================================
+   3. NAVIGATION CONFIG
+   ── Change nav links without touching layout code ──
+   ============================================================== */
+const NAV_LINKS = [
+  { label: 'Home',    route: '/',        icon: 'fa-house',           bottomNav: true  },
+  { label: 'Explore', route: '/explore', icon: 'fa-compass',         bottomNav: true,  feature: 'explore'  },
+  { label: 'Videos',  route: '/videos',  icon: 'fa-play-circle',     bottomNav: true,  feature: 'videos'   },
+  { label: 'Blog',    route: '/blog',    icon: 'fa-newspaper',       bottomNav: true,  feature: 'blog'     },
+  { label: 'About',   route: '/about',   icon: 'fa-circle-info',     bottomNav: false, feature: 'about'    },
+  { label: 'Support', route: '/support', icon: 'fa-headset',         bottomNav: false, feature: 'support'  },
+];
+
+/* ==============================================================
+   4. DEMO SEED DATA
+   ── Replace with real DB/API calls per site ──
+   ============================================================== */
+const DB = {
+  categories: [
+    { id:'cat-1', name:'Technology',   slug:'technology',   icon:'fa-microchip',    color:'#6366f1', count:12 },
+    { id:'cat-2', name:'AI & Machine Learning', slug:'ai-ml', icon:'fa-brain',      color:'#06b6d4', count:8  },
+    { id:'cat-3', name:'Mobile Apps',  slug:'mobile-apps',  icon:'fa-mobile-screen',color:'#f59e0b', count:15 },
+    { id:'cat-4', name:'Education',    slug:'education',    icon:'fa-graduation-cap',color:'#22c55e', count:6 },
+    { id:'cat-5', name:'Productivity', slug:'productivity', icon:'fa-bolt',         color:'#ec4899', count:9  },
+    { id:'cat-6', name:'Design',       slug:'design',       icon:'fa-palette',      color:'#a78bfa', count:4  },
+  ],
+  items: [
+    {
+      id:'item-1', name:'Noor AI Assistant', slug:'noor-ai-assistant', category:'cat-2',
+      tagline:'Your intelligent AI companion for daily tasks.',
+      shortDescription:'Noor is a powerful mobile AI assistant that helps you write, think, plan and learn smarter.',
+      longDescription:`Noor is a next-generation AI assistant designed for mobile-first users who want real intelligence in their pocket. Powered by the latest language models, Noor understands context, remembers conversations and adapts to your personal style.\n\nWhether you're drafting emails, brainstorming ideas, solving problems or learning something new — Noor is there every step of the way.`,
+      features:['Contextual memory across sessions','Multi-modal input (text, voice)','100+ specialist modes','Offline-ready core','Privacy-first design','Available in 12 languages'],
+      platforms:['Android','iOS'],
+      languages:['English','Portuguese','Arabic','Spanish','French'],
+      useCases:['Writing assistant','Study companion','Business productivity','Creative brainstorming'],
+      playStore:'#',
+      appStore:'#',
+      coverImage:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80',
+      icon:'https://placehold.co/120x120/6366f1/fff?text=Noor',
+      screenshots:['https://placehold.co/390x844/1e293b/6366f1?text=Noor+Home','https://placehold.co/390x844/1e293b/06b6d4?text=Noor+Chat'],
+      badge:'Featured', badgeColor:'badge-primary',
+      rating:4.8, reviews:1240,
+      publishDate:'2024-03-01', updatedDate:'2024-11-01',
+      status:'published',
+      seo:{ title:'Noor AI Assistant — Smart AI for Everyone', description:'Discover Noor, the intelligent AI assistant app for Android and iOS. Write faster, learn more, and do more with AI.', focusKeyword:'AI assistant app' },
+      faq:[
+        { q:'What platforms does Noor support?', a:'Noor is available on Android and iOS.' },
+        { q:'Is Noor free?', a:'Noor offers a free tier with premium plans available.' },
+        { q:'Does Noor work offline?', a:'Core features work offline; advanced AI requires internet.' },
+      ],
+      relatedItems:['item-2','item-3'],
+      relatedArticles:['art-1','art-2'],
+    },
+    {
+      id:'item-2', name:'FluentStep AI', slug:'fluentstep-ai', category:'cat-4',
+      tagline:'Master any language with AI-powered conversation.',
+      shortDescription:'FluentStep uses AI to create personalized language learning paths and real conversation practice.',
+      longDescription:`FluentStep AI reimagines language learning through real AI conversation, adaptive curriculum and evidence-based techniques. Unlike traditional apps, FluentStep focuses on speaking confidence from day one.\n\nPractice conversations on topics that matter to you — travel, business, academics or everyday life — and get instant, intelligent feedback.`,
+      features:['AI conversation partner','Adaptive grammar engine','Pronunciation scoring','Vocabulary spaced repetition','Progress analytics','12 target languages'],
+      platforms:['Android','iOS','Web'],
+      languages:['English','Portuguese','Arabic','Spanish','French','German','Japanese'],
+      useCases:['Language learning','Travel preparation','Business English','Academic preparation'],
+      playStore:'#',
+      appStore:'#',
+      coverImage:'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80',
+      icon:'https://placehold.co/120x120/06b6d4/fff?text=FS',
+      screenshots:['https://placehold.co/390x844/1e293b/06b6d4?text=FluentStep+Home'],
+      badge:'New', badgeColor:'badge-secondary',
+      rating:4.7, reviews:890,
+      publishDate:'2024-06-01', updatedDate:'2024-11-15',
+      status:'published',
+      seo:{ title:'FluentStep AI — AI Language Learning App', description:'Learn any language with FluentStep AI. Real conversation practice powered by artificial intelligence.', focusKeyword:'AI language learning app' },
+      faq:[
+        { q:'How many languages does FluentStep support?', a:'Currently 12 languages with more coming soon.' },
+        { q:'Can I use FluentStep on desktop?', a:'Yes, FluentStep has a web version as well as mobile apps.' },
+      ],
+      relatedItems:['item-1','item-3'],
+      relatedArticles:['art-1'],
+    },
+    {
+      id:'item-3', name:'ScienceMind AI', slug:'sciencemind-ai', category:'cat-4',
+      tagline:'Understand science deeply with AI-guided learning.',
+      shortDescription:'ScienceMind makes complex science accessible through adaptive AI tutoring and visual explanations.',
+      longDescription:`ScienceMind AI is an adaptive science education platform that breaks down complex concepts in physics, chemistry and biology into clear, engaging lessons powered by AI.\n\nFrom high school students to curious adults, ScienceMind meets learners where they are and builds genuine understanding — not just memorization.`,
+      features:['Adaptive AI tutor','Interactive visual simulations','Multi-subject coverage','Progress tracking','Exam preparation mode','Parent/teacher dashboard'],
+      platforms:['Android','iOS','Web'],
+      languages:['English','Portuguese','Spanish','Arabic'],
+      useCases:['STEM education','Exam preparation','Homeschooling','Curious learners'],
+      playStore:'#',
+      appStore:'#',
+      coverImage:'https://images.unsplash.com/photo-1532094349884-543559cc8051?w=800&q=80',
+      icon:'https://placehold.co/120x120/22c55e/fff?text=SM',
+      screenshots:['https://placehold.co/390x844/1e293b/22c55e?text=ScienceMind+Home'],
+      badge:'Popular', badgeColor:'badge-accent',
+      rating:4.9, reviews:2100,
+      publishDate:'2024-01-15', updatedDate:'2024-10-20',
+      status:'published',
+      seo:{ title:'ScienceMind AI — Adaptive Science Learning App', description:'Discover ScienceMind AI, the intelligent science tutor app for students and curious minds.', focusKeyword:'AI science learning app' },
+      faq:[
+        { q:'What subjects does ScienceMind cover?', a:'Physics, Chemistry, Biology and Earth Sciences.' },
+        { q:'Is ScienceMind suitable for adults?', a:'Absolutely — ScienceMind adapts to any learning level.' },
+      ],
+      relatedItems:['item-1','item-2'],
+      relatedArticles:['art-2'],
+    },
+  ],
+  articles: [
+    {
+      id:'art-1', slug:'best-ai-apps-2024', category:'cat-2',
+      title:'The Best AI Apps of 2024: A Comprehensive Guide',
+      subtitle:'From personal assistants to creative tools — AI is transforming how we use our phones.',
+      author:'Editorial Team', publishDate:'2024-11-01', updatedDate:'2024-11-20',
+      readingTime:8, status:'published',
+      coverImage:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80',
+      tags:['AI','apps','mobile','technology','productivity'],
+      featuredItem:'item-1',
+      excerpt:'Artificial intelligence has moved from science fiction to your pocket. Discover the most powerful AI apps reshaping productivity, learning and creativity in 2024.',
+      toc:['Introduction','Top AI Assistants','AI for Learning','AI for Creativity','How to Choose','FAQ','Conclusion'],
+      body:`
+        <h2 id="introduction">Introduction</h2>
+        <p>Artificial intelligence has gone from a niche technical curiosity to the most transformative technology in our daily lives. In 2024, AI-powered apps are reshaping how we work, learn, communicate and create.</p>
+        <p>This guide covers the most impactful AI apps available on Android and iOS, organized by use case, to help you find the right tools for your needs.</p>
+        <blockquote>AI is not replacing humans — it's amplifying what humans can do.</blockquote>
+        <h2 id="top-ai-assistants">Top AI Assistants</h2>
+        <p>AI assistants have become the Swiss Army knives of mobile productivity. The best ones combine large language model intelligence with seamless mobile UX, contextual memory and multi-modal input.</p>
+        <h3>What makes a great AI assistant?</h3>
+        <ul>
+          <li>Natural conversation quality</li>
+          <li>Memory and context across sessions</li>
+          <li>Speed and offline capability</li>
+          <li>Privacy and data security</li>
+          <li>Multi-language support</li>
+        </ul>
+        <h2 id="ai-for-learning">AI for Learning</h2>
+        <p>Learning apps powered by AI are achieving what traditional education often cannot: true personalization. Adaptive AI tutors adjust difficulty, pace and content to each learner's unique profile.</p>
+        <h2 id="ai-for-creativity">AI for Creativity</h2>
+        <p>Image generation, music composition, code assistance and writing tools have exploded in 2024. AI creativity tools are now accessible to everyone, not just professionals.</p>
+        <h2 id="how-to-choose">How to Choose the Right AI App</h2>
+        <p>When selecting an AI app, consider your primary use case, privacy requirements, budget and platform preferences. Not all AI apps are equal — quality varies significantly based on the underlying model and product design.</p>
+      `,
+      faq:[
+        { q:'Are AI apps safe to use?', a:'Reputable AI apps prioritize privacy and data security. Always review the privacy policy and data handling practices.' },
+        { q:'Do AI apps require internet?', a:'Most advanced AI features require internet connectivity, though many apps offer offline modes for basic functionality.' },
+        { q:'Are AI apps worth paying for?', a:'For regular users, premium AI apps typically offer significant productivity and quality improvements over free tiers.' },
+      ],
+      relatedArticles:['art-2'],
+      relatedItems:['item-1','item-2'],
+      seo:{ title:'Best AI Apps 2024 — Complete Guide | GlobalWebsiteMaster', description:'Discover the best AI apps of 2024 for productivity, learning and creativity. Expert guide with ratings, features and comparisons.', focusKeyword:'best AI apps 2024' },
+    },
+    {
+      id:'art-2', slug:'ai-education-revolution', category:'cat-4',
+      title:'How AI is Revolutionizing Education in 2024',
+      subtitle:'Personalized learning at scale — from classroom to pocket.',
+      author:'Research Team', publishDate:'2024-10-15', updatedDate:'2024-11-10',
+      readingTime:6, status:'published',
+      coverImage:'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=1200&q=80',
+      tags:['AI','education','learning','apps','technology'],
+      featuredItem:'item-3',
+      excerpt:'AI is making personalized education possible at scale — adapting curriculum, pacing and teaching style to each individual learner.',
+      toc:['The Education Gap','How AI Fills It','Key Technologies','Leading Apps','Future Outlook'],
+      body:`
+        <h2 id="the-education-gap">The Education Gap</h2>
+        <p>Traditional education has always struggled with personalization. One teacher serves thirty students with vastly different needs, learning speeds and backgrounds. AI is changing this equation fundamentally.</p>
+        <h2 id="how-ai-fills-it">How AI Fills the Education Gap</h2>
+        <p>Adaptive AI tutors analyze every interaction — right answers, wrong answers, hesitations, skips — to build a precise model of each learner's knowledge and optimize the next lesson accordingly.</p>
+        <h2 id="key-technologies">Key Technologies Powering AI Education</h2>
+        <ul>
+          <li>Large language models for natural conversation and explanation</li>
+          <li>Spaced repetition algorithms for long-term retention</li>
+          <li>Computer vision for handwriting and diagram recognition</li>
+          <li>Speech recognition for pronunciation coaching</li>
+        </ul>
+        <h2 id="leading-apps">Leading AI Education Apps</h2>
+        <p>Apps like ScienceMind AI and FluentStep AI represent a new generation of education products built entirely around AI-first principles rather than digitizing old textbooks.</p>
+      `,
+      faq:[
+        { q:'Can AI replace teachers?', a:'AI tutors complement teachers by handling personalization and practice, freeing teachers for higher-order engagement.' },
+        { q:'What age groups benefit most from AI education apps?', a:'AI education apps are effective across all ages — from young children to adult learners.' },
+      ],
+      relatedArticles:['art-1'],
+      relatedItems:['item-2','item-3'],
+      seo:{ title:'How AI is Revolutionizing Education in 2024', description:'Explore how artificial intelligence is transforming personalized learning. The AI education revolution explained.', focusKeyword:'AI education apps' },
+    },
+  ],
+  videos: [
+    {
+      id:'vid-1', slug:'noor-ai-demo', title:'Noor AI — Full Demo & Review',
+      description:'See Noor AI in action. We cover every major feature, compare it to alternatives and share our honest verdict.',
+      category:'cat-2', relatedItem:'item-1',
+      thumbnail:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80',
+      videoUrl:'https://www.w3schools.com/html/mov_bbb.mp4', // placeholder
+      cloudflareStreamId:'', duration:'8:24', views:12400,
+      publishDate:'2024-11-01', status:'published',
+      tags:['AI','review','demo','mobile'],
+      transcript:'',
+      seo:{ title:'Noor AI Full Demo & Review — Is It Worth It?', description:'Complete video review of Noor AI assistant app. Features, pricing, comparisons and verdict.' },
+    },
+    {
+      id:'vid-2', slug:'fluentstep-language-learning', title:'FluentStep AI — Language Learning in 2024',
+      description:'How FluentStep AI is using artificial intelligence to transform language learning. Full walkthrough and tips.',
+      category:'cat-4', relatedItem:'item-2',
+      thumbnail:'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80',
+      videoUrl:'https://www.w3schools.com/html/mov_bbb.mp4',
+      cloudflareStreamId:'', duration:'6:11', views:8900,
+      publishDate:'2024-10-20', status:'published',
+      tags:['language learning','AI','education'],
+      transcript:'',
+      seo:{ title:'FluentStep AI Review — Best AI Language Learning App?', description:'Watch our full FluentStep AI review. Learn how AI-powered conversation practice accelerates language learning.' },
+    },
+    {
+      id:'vid-3', slug:'sciencemind-science-tutor', title:'ScienceMind AI — The AI Science Tutor',
+      description:'We put ScienceMind AI through its paces across physics, chemistry and biology. Here\'s how it performed.',
+      category:'cat-4', relatedItem:'item-3',
+      thumbnail:'https://images.unsplash.com/photo-1532094349884-543559cc8051?w=800&q=80',
+      videoUrl:'https://www.w3schools.com/html/mov_bbb.mp4',
+      cloudflareStreamId:'', duration:'10:02', views:15600,
+      publishDate:'2024-09-30', status:'published',
+      tags:['science','education','AI','review'],
+      transcript:'',
+      seo:{ title:'ScienceMind AI — Full Science Tutor Review', description:'Complete review of ScienceMind AI for students and educators. Features, subjects, pricing and verdict.' },
+    },
+  ],
+  stats: [
+    { value:50,   suffix:'K+', label:'Users Worldwide',   icon:'fa-users' },
+    { value:4.8,  suffix:'★',  label:'Average Rating',    icon:'fa-star' },
+    { value:20,   suffix:'+',  label:'Countries Reached', icon:'fa-globe' },
+    { value:99,   suffix:'%',  label:'Uptime',            icon:'fa-shield-halved' },
+  ],
+  testimonials: [
+    { name:'Sofia R.', role:'Product Designer', avatar:'https://i.pravatar.cc/64?img=47', text:'GlobalWebsiteMaster saved us weeks of frontend work. The architecture is clean, fast and rebrands in minutes.', rating:5 },
+    { name:'Marcus T.', role:'Startup Founder', avatar:'https://i.pravatar.cc/64?img=33', text:'We launched three different websites from the same master. SEO performance was excellent from day one.', rating:5 },
+    { name:'Lina K.', role:'Content Manager', avatar:'https://i.pravatar.cc/64?img=25', text:'The blog and video system is exactly what we needed. Admin is intuitive and the SEO tooling is genuinely helpful.', rating:5 },
+  ],
+  faq: [
+    { q:'What is GlobalWebsiteMaster?', a:'GlobalWebsiteMaster is a production-quality, reusable website architecture built once and adapted for any future project by changing configuration, content and branding.' },
+    { q:'How do I start a new website from this master?', a:'Duplicate the project, update SITE config with your branding, replace demo content with real content, enable/disable FEATURES as needed, and configure your secrets and database.' },
+    { q:'Does it support multilingual websites?', a:'The architecture is multilingual-ready. The i18n module supports translated UI strings, RTL/LTR switching and locale-aware URLs.' },
+    { q:'Is SEO built in?', a:'Yes. Every page supports dynamic titles, meta descriptions, canonical URLs, Open Graph, Twitter Cards, structured data (JSON-LD) and sitemap architecture out of the box.' },
+    { q:'Can I use this for an app portfolio website?', a:'Absolutely. The Item/Entity system is generic — an "item" can become an app, service, product, course or tool with a config change.' },
+    { q:'What backend does it use?', a:'GlobalWebsiteMaster is designed to work with OnSpace Cloud (Supabase-compatible). Database schema and edge functions are documented in the Admin > Docs section.' },
+  ],
+  newsletter_subscribers: [],
+  contact_messages: [],
+  seo_hubs: [
+    { slug:'ai-apps', title:'Best AI Apps', description:'Discover the most powerful AI applications for Android, iOS and web.', icon:'fa-brain', color:'#6366f1' },
+    { slug:'education-apps', title:'Education Apps', description:'AI-powered learning apps that adapt to your pace and goals.', icon:'fa-graduation-cap', color:'#22c55e' },
+    { slug:'productivity-apps', title:'Productivity Apps', description:'Work smarter with AI tools for focus, organization and output.', icon:'fa-bolt', color:'#f59e0b' },
+    { slug:'mobile-apps', title:'Mobile Apps', description:'The best mobile applications for Android and iPhone in 2024.', icon:'fa-mobile-screen', color:'#06b6d4' },
+  ],
+};
+
+/* ==============================================================
+   5. i18n / LOCALIZATION STRINGS
+   ── Add more languages as needed ──
+   ============================================================== */
+const I18N = {
+  en: {
+    searchPlaceholder:   'Search articles, content, videos…',
+    noResults:           'No results found.',
+    loading:             'Loading…',
+    readMore:            'Read More',
+    watchVideo:          'Watch Video',
+    subscribeNewsletter: 'Subscribe to our newsletter',
+    emailPlaceholder:    'Your email address',
+    subscribe:           'Subscribe',
+    sendMessage:         'Send Message',
+    viewAll:             'View All',
+    relatedArticles:     'Related Articles',
+    relatedVideos:       'Related Videos',
+    relatedItems:        'Related Apps',
+    publishedOn:         'Published on',
+    updatedOn:           'Updated on',
+    minuteRead:          'min read',
+    allCategories:       'All Categories',
+    featured:            'Featured',
+    latest:              'Latest',
+    popular:             'Popular',
+    admin:               'Admin',
+    dashboard:           'Dashboard',
+    settings:            'Settings',
+    logout:              'Logout',
+  },
+  pt: {
+    searchPlaceholder:   'Buscar artigos, conteúdo, vídeos…',
+    noResults:           'Nenhum resultado encontrado.',
+    loading:             'Carregando…',
+    readMore:            'Leia Mais',
+    subscribe:           'Inscrever',
+  },
+  ar: {
+    searchPlaceholder:   'ابحث عن مقالات، محتوى، فيديوهات…',
+    noResults:           'لا توجد نتائج.',
+    loading:             'جارٍ التحميل…',
+    readMore:            'اقرأ المزيد',
+  },
+};
+const t = (key) => (I18N[SITE.defaultLanguage] || I18N.en)[key] || key;
+
+/* ==============================================================
+   6. ANALYTICS (first-party events)
+   ============================================================== */
+const Analytics = {
+  events: JSON.parse(localStorage.getItem('gwm_analytics') || '[]'),
+  track(eventName, data={}) {
+    if (!FEATURES.analytics) return;
+    const ev = { event: eventName, data, ts: Date.now(), path: currentRoute };
+    this.events.push(ev);
+    if (this.events.length > 500) this.events = this.events.slice(-500);
+    localStorage.setItem('gwm_analytics', JSON.stringify(this.events));
+    // GA4 forward if configured
+    if (SITE.analyticsId && typeof gtag === 'function') {
+      gtag('event', eventName, data);
+    }
+  },
+  pageView(path) { this.track('page_view', { path }); },
+  ctaClick(label) { this.track('cta_click', { label }); },
+  search(query) { this.track('search', { query }); },
+  videoView(id)  { this.track('video_view', { id }); },
+  articleView(id){ this.track('article_view', { id }); },
+  newsletterSignup(){ this.track('newsletter_signup'); },
+  contactSubmit() { this.track('contact_submit'); },
+};
+
+/* ==============================================================
+   7. ROUTER
+   ============================================================== */
+let currentRoute = '/';
+let routeHistory = [];
+
+const ROUTES = {
+  '/':             renderHome,
+  '/explore':      renderExplore,
+  '/videos':       renderVideos,
+  '/blog':         renderBlog,
+  '/about':        renderAbout,
+  '/support':      renderSupport,
+  '/contact':      renderContact,
+  '/privacy':      renderPrivacy,
+  '/terms':        renderTerms,
+  '/sitemap':      renderSitemapPage,
+  '/search':       renderSearch,
+  '/404':          render404,
+  // Dynamic routes handled in routeMatch()
+};
+
+function routeMatch(path) {
+  if (ROUTES[path]) return ROUTES[path];
+  if (path.startsWith('/blog/'))    return () => renderArticle(path.replace('/blog/', ''));
+  if (path.startsWith('/explore/')) return () => renderItemDetail(path.replace('/explore/', ''));
+  if (path.startsWith('/videos/'))  return () => renderVideoDetail(path.replace('/videos/', ''));
+  if (path.startsWith('/category/'))return () => renderCategoryHub(path.replace('/category/', ''));
+  if (path.startsWith('/hub/'))     return () => renderSeoHub(path.replace('/hub/', ''));
+  if (path.startsWith('/admin'))    return () => renderAdmin(path);
+  return render404;
+}
+
+function navigate(route, pushState=true) {
+  currentRoute = route;
+  if (pushState) {
+    history.pushState({ route }, '', '#' + route);
+  }
+  const app = document.getElementById('app-root');
+  app.innerHTML = '<div class="flex flex-col items-center justify-center min-h-96 gap-4"><div class="w-10 h-10 rounded-full border-2 border-t-transparent animate-spin" style="border-color:var(--color-primary);border-top-color:transparent;"></div></div>';
+  setTimeout(() => {
+    routeMatch(route)();
+    updateActiveNav();
+    Analytics.pageView(route);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 80);
+}
+
+window.addEventListener('popstate', (e) => {
+  const route = location.hash.replace('#', '') || '/';
+  navigate(route, false);
+});
+
+/* ==============================================================
+   8. SEO HELPERS
+   ============================================================== */
+function setSEO({ title, description, canonical, robots, jsonLd, image, type='website' }) {
+  document.getElementById('page-title').textContent = title || SITE.name;
+  document.getElementById('meta-description').content = description || SITE.description;
+  document.getElementById('canonical').href = canonical || SITE.url + currentRoute;
+  document.getElementById('meta-robots').content = robots || 'index, follow';
+  // OG
+  document.getElementById('og-title').content = title || SITE.name;
+  document.getElementById('og-description').content = description || SITE.description;
+  document.getElementById('og-url').content = canonical || SITE.url + currentRoute;
+  document.getElementById('og-image').content = image || `https://placehold.co/1200x630/0f172a/6366f1?text=${encodeURIComponent(SITE.name)}`;
+  // Twitter
+  document.getElementById('tw-title').content = title || SITE.name;
+  document.getElementById('tw-description').content = description || SITE.description;
+  document.getElementById('tw-image').content = image || `https://placehold.co/1200x630/0f172a/6366f1?text=${encodeURIComponent(SITE.name)}`;
+  // JSON-LD (page-specific)
+  let existing = document.getElementById('jsonld-page');
+  if (existing) existing.remove();
+  if (jsonLd) {
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.id = 'jsonld-page';
+    s.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(s);
+  }
+}
+
+function breadcrumbsLD(items) {
+  return {
+    '@context':'https://schema.org',
+    '@type':'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type':'ListItem',
+      position: i+1,
+      name: item.name,
+      item: SITE.url + item.path,
+    })),
+  };
+}
+
+function breadcrumbsHTML(items) {
+  return `<nav aria-label="Breadcrumb" class="flex items-center gap-1 text-sm text-muted mb-6">
+    ${items.map((item, i) => i < items.length-1
+      ? `<span class="breadcrumb-item ${i>0?'breadcrumb-item':''}">${i===0?'':''}<a onclick="navigate('${item.path}')" class="hover:text-white transition-colors cursor-pointer">${item.name}</a></span>`
+      : `<span class="breadcrumb-item text-white">${item.name}</span>`
+    ).join('')}
+  </nav>`;
+}
+
+/* ==============================================================
+   9. SHARED COMPONENTS
+   ============================================================== */
+
+// Card Components
+function itemCard(item, compact=false) {
+  return `<div class="glass rounded-xl border overflow-hidden card-hover" style="border-color:var(--color-border);" onclick="navigate('/explore/${item.slug}')">
+    <div class="relative aspect-16-9 overflow-hidden">
+      <img src="${item.coverImage}" alt="${item.name} — ${item.tagline}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.src='https://placehold.co/800x450/1e293b/6366f1?text=${encodeURIComponent(item.name)}'" />
+      ${item.badge ? `<span class="badge ${item.badgeColor} absolute top-3 left-3">${item.badge}</span>` : ''}
+    </div>
+    <div class="p-4">
+      <div class="flex items-start gap-3 mb-3">
+        <img src="${item.icon}" alt="${item.name} icon" loading="lazy" class="w-10 h-10 rounded-xl shrink-0" onerror="this.src='https://placehold.co/80x80/1e293b/6366f1?text=${item.name[0]}'" />
+        <div class="min-w-0">
+          <h3 class="font-heading font-bold text-base leading-tight">${item.name}</h3>
+          <p class="text-muted text-xs mt-0.5">${item.tagline}</p>
+        </div>
+      </div>
+      ${!compact ? `<p class="text-sm text-muted line-clamp-2 mb-3">${item.shortDescription}</p>` : ''}
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-1">
+          <i class="fa-solid fa-star text-accent text-xs" style="color:var(--color-accent);"></i>
+          <span class="text-xs font-semibold">${item.rating}</span>
+          <span class="text-muted text-xs">(${item.reviews.toLocaleString()})</span>
+        </div>
+        <div class="flex gap-1">
+          ${item.platforms.includes('Android') ? '<span class="badge badge-muted"><i class="fa-brands fa-android mr-1"></i>Android</span>' : ''}
+          ${item.platforms.includes('iOS') ? '<span class="badge badge-muted"><i class="fa-brands fa-apple mr-1"></i>iOS</span>' : ''}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function articleCard(art, large=false) {
+  return `<div class="glass rounded-xl border overflow-hidden card-hover" style="border-color:var(--color-border);" onclick="navigate('/blog/${art.slug}')">
+    <div class="relative ${large?'aspect-16-9':'h-40'} overflow-hidden">
+      <img src="${art.coverImage}" alt="${art.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.src='https://placehold.co/800x400/1e293b/6366f1?text=Article'" />
+    </div>
+    <div class="p-4 sm:p-5">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="badge badge-primary text-xs">${getCategoryName(art.category)}</span>
+        <span class="text-muted text-xs">${art.readingTime} ${t('minuteRead')}</span>
+      </div>
+      <h3 class="font-heading font-bold ${large?'text-xl':'text-base'} mb-2 leading-snug line-clamp-2">${art.title}</h3>
+      <p class="text-muted text-sm line-clamp-2 mb-3">${art.excerpt}</p>
+      <div class="flex items-center justify-between text-xs text-muted">
+        <span><i class="fa-regular fa-user mr-1"></i>${art.author}</span>
+        <span>${formatDate(art.publishDate)}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function videoCard(vid) {
+  return `<div class="glass rounded-xl border overflow-hidden card-hover" style="border-color:var(--color-border);" onclick="navigate('/videos/${vid.slug}')">
+    <div class="relative aspect-16-9 overflow-hidden">
+      <img src="${vid.thumbnail}" alt="${vid.title}" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x450/1e293b/6366f1?text=Video'" />
+      <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+        <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+          <i class="fa-solid fa-play text-white text-xl ml-1"></i>
+        </div>
+      </div>
+      <span class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-0.5 rounded">${vid.duration}</span>
+      <span class="absolute top-2 left-2 badge badge-secondary text-xs">${getCategoryName(vid.category)}</span>
+    </div>
+    <div class="p-4">
+      <h3 class="font-heading font-semibold text-sm mb-1 line-clamp-2">${vid.title}</h3>
+      <p class="text-muted text-xs line-clamp-2 mb-2">${vid.description}</p>
+      <div class="flex items-center justify-between text-xs text-muted">
+        <span><i class="fa-regular fa-eye mr-1"></i>${(vid.views/1000).toFixed(1)}K views</span>
+        <span>${formatDate(vid.publishDate)}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function skeletonCard(h=280) {
+  return `<div class="glass rounded-xl border overflow-hidden" style="border-color:var(--color-border);height:${h}px;">
+    <div class="skeleton h-44 w-full"></div>
+    <div class="p-4 space-y-2">
+      <div class="skeleton h-4 w-3/4 rounded"></div>
+      <div class="skeleton h-3 w-1/2 rounded"></div>
+      <div class="skeleton h-3 w-full rounded"></div>
+    </div>
+  </div>`;
+}
+
+function emptyState(icon, title, subtitle, action='') {
+  return `<div class="flex flex-col items-center justify-center py-20 text-center px-4">
+    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style="background:var(--color-surface-alt);">
+      <i class="fa-solid ${icon} text-2xl text-muted"></i>
+    </div>
+    <h3 class="font-heading font-bold text-lg mb-2">${title}</h3>
+    <p class="text-muted text-sm max-w-xs mb-6">${subtitle}</p>
+    ${action}
+  </div>`;
+}
+
+function sectionHeader(tag='', title, subtitle='', action='') {
+  return `<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+    <div>
+      ${tag ? `<span class="badge badge-primary mb-3">${tag}</span>` : ''}
+      <h2 class="font-heading font-bold text-2xl sm:text-3xl">${title}</h2>
+      ${subtitle ? `<p class="text-muted mt-2 max-w-xl">${subtitle}</p>` : ''}
+    </div>
+    ${action ? `<div class="shrink-0">${action}</div>` : ''}
+  </div>`;
+}
+
+function newsletterSection() {
+  if (!FEATURES.newsletter) return '';
+  return `<section class="py-12">
+    <div class="glass rounded-2xl border p-8 md:p-12 text-center relative overflow-hidden" style="border-color:var(--color-border);">
+      <div class="absolute inset-0 opacity-10" style="background:radial-gradient(ellipse at center, var(--color-primary) 0%, transparent 70%);"></div>
+      <div class="relative">
+        <span class="badge badge-primary mb-4">${t('subscribeNewsletter')}</span>
+        <h2 class="font-heading font-bold text-2xl sm:text-3xl mb-3">Stay in the loop</h2>
+        <p class="text-muted max-w-lg mx-auto mb-6">Get the latest articles, app reviews and AI news delivered straight to your inbox. No spam, unsubscribe anytime.</p>
+        <form onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+          <input type="email" name="email" placeholder="${t('emailPlaceholder')}" required class="form-input flex-1" />
+          <button type="submit" class="btn btn-primary">${t('subscribe')}<i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+        <p class="text-muted text-xs mt-3">We respect your privacy. Unsubscribe at any time.</p>
+      </div>
+    </div>
+  </section>`;
+}
+
+function statsSection() {
+  return `<section class="py-12">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      ${DB.stats.map(s => `
+        <div class="glass rounded-xl border p-6 text-center" style="border-color:var(--color-border);">
+          <i class="fa-solid ${s.icon} text-primary mb-3 text-2xl" style="color:var(--color-primary-light);"></i>
+          <div class="stat-value gradient-text" data-target="${s.value}" data-suffix="${s.suffix}">0${s.suffix}</div>
+          <p class="text-muted text-sm mt-1">${s.label}</p>
+        </div>`).join('')}
+    </div>
+  </section>`;
+}
+
+function faqSection(items=DB.faq, schema=true) {
+  const faqLD = schema ? {
+    '@context':'https://schema.org',
+    '@type':'FAQPage',
+    mainEntity: items.map(f=>({ '@type':'Question', name:f.q, acceptedAnswer:{'@type':'Answer',text:f.a} }))
+  } : null;
+  if (schema && faqLD) {
+    let s = document.createElement('script');
+    s.type='application/ld+json'; s.id='jsonld-faq'; s.textContent=JSON.stringify(faqLD);
+    let e = document.getElementById('jsonld-faq');
+    if (e) e.remove();
+    document.head.appendChild(s);
+  }
+  return `<section class="py-12">
+    ${sectionHeader('FAQ', 'Frequently Asked Questions', 'Everything you need to know.')}
+    <div class="space-y-3 max-w-3xl">
+      ${items.map((f,i) => `
+        <div class="faq-item">
+          <button onclick="toggleFaq(${i})" class="w-full flex items-center justify-between p-5 text-left gap-4 hover:bg-surface transition-colors" style="background:var(--color-surface);">
+            <span class="font-semibold">${f.q}</span>
+            <i class="fa-solid fa-chevron-down faq-icon-${i} text-muted transition-transform shrink-0"></i>
+          </button>
+          <div class="faq-answer" id="faq-ans-${i}">
+            <div class="px-5 pb-5 pt-0 text-muted text-sm leading-relaxed">${f.a}</div>
+          </div>
+        </div>`).join('')}
+    </div>
+  </section>`;
+}
+
+function renderFooter() {
+  const tpl = document.getElementById('footer-template').content.cloneNode(true);
+  tpl.querySelector('.footer-logo-mark').textContent = SITE.logoMark;
+  tpl.querySelector('.footer-site-name').textContent = SITE.name;
+  tpl.querySelector('.footer-tagline').textContent = SITE.tagline;
+  tpl.querySelector('.footer-copyright').textContent = SITE.copyright;
+  const socials = Object.entries(SITE.socialLinks).filter(([,v])=>v).map(([k,v])=>
+    `<a href="${v}" target="_blank" rel="noopener" aria-label="${k}" class="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-primary transition-colors text-muted hover:text-white" style="background:var(--color-surface-alt);">
+      <i class="fa-brands fa-${k} text-sm"></i>
+    </a>`).join('');
+  tpl.querySelector('.footer-socials').innerHTML = socials;
+  const div = document.createElement('div');
+  div.appendChild(tpl);
+  return div.innerHTML;
+}
+
+/* ==============================================================
+   10. PAGE RENDERERS
+   ============================================================== */
+
+// ── HOME ──────────────────────────────────────────────────────
+function renderHome() {
+  setSEO({
+    title: `${SITE.name} — ${SITE.tagline}`,
+    description: SITE.description,
+    canonical: SITE.url + '/',
+    jsonLd: { '@context':'https://schema.org','@type':'WebSite','name':SITE.name,'url':SITE.url,'description':SITE.description },
+  });
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter">
+    <!-- HERO -->
+    <section class="hero-bg py-20 sm:py-28 px-4">
+      <div class="max-w-7xl mx-auto text-center">
+        <span class="badge badge-primary mb-6">🚀 Website Factory v1.0</span>
+        <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-7xl mb-6 leading-tight">
+          Build Great Websites.<br/><span class="gradient-text">Once. For Everyone.</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-muted max-w-2xl mx-auto mb-10">
+          GlobalWebsiteMaster is a production-quality, fully configurable website factory — one architecture powering unlimited future websites.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center mb-12">
+          <button onclick="navigate('/explore');Analytics.ctaClick('Hero — Explore')" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-compass"></i> Explore Content
+          </button>
+          <button onclick="navigate('/blog');Analytics.ctaClick('Hero — Blog')" class="btn btn-secondary btn-lg">
+            <i class="fa-solid fa-newspaper"></i> Read Blog
+          </button>
+        </div>
+        <!-- Hero Media -->
+        <div class="relative max-w-4xl mx-auto">
+          <div class="glass rounded-2xl border overflow-hidden glow" style="border-color:rgba(99,102,241,.3);">
+            <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=1200&q=80" alt="GlobalWebsiteMaster hero — modern website factory dashboard" loading="eager" class="w-full aspect-16-9 object-cover opacity-90" onerror="this.src='https://placehold.co/1200x675/1e293b/6366f1?text=GlobalWebsiteMaster'" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+              <div class="text-left">
+                <p class="text-white font-heading font-bold text-xl">Fully Configurable</p>
+                <p class="text-white/70 text-sm">Change SITE.name → entire site rebrands</p>
+              </div>
+            </div>
+          </div>
+          <!-- Floating badges -->
+          <div class="absolute -top-4 -right-4 glass rounded-xl border px-4 py-2 hidden sm:flex items-center gap-2" style="border-color:rgba(6,182,212,.3);">
+            <i class="fa-solid fa-magnifying-glass text-secondary" style="color:var(--color-secondary);"></i>
+            <span class="text-sm font-semibold">SEO-First</span>
+          </div>
+          <div class="absolute -bottom-4 -left-4 glass rounded-xl border px-4 py-2 hidden sm:flex items-center gap-2" style="border-color:rgba(245,158,11,.3);">
+            <i class="fa-solid fa-mobile-screen text-accent" style="color:var(--color-accent);"></i>
+            <span class="text-sm font-semibold">Mobile-First</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- STATS -->
+      ${statsSection()}
+
+      <!-- CATEGORIES -->
+      <section class="py-12">
+        ${sectionHeader('Categories', 'Explore by Category', 'Browse content organized into clear topic clusters.', `<button onclick="navigate('/explore')" class="btn btn-secondary btn-sm">${t('viewAll')} <i class="fa-solid fa-arrow-right"></i></button>`)}
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          ${DB.categories.map(cat => `
+            <button onclick="navigate('/category/${cat.slug}')" class="glass rounded-xl border p-4 text-center card-hover" style="border-color:var(--color-border);">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2" style="background:${cat.color}25;">
+                <i class="fa-solid ${cat.icon} text-lg" style="color:${cat.color};"></i>
+              </div>
+              <p class="font-semibold text-xs">${cat.name}</p>
+              <p class="text-muted text-xs mt-0.5">${cat.count} items</p>
+            </button>`).join('')}
+        </div>
+      </section>
+
+      <!-- FEATURED ITEMS -->
+      <section class="py-12">
+        ${sectionHeader('Featured', 'Highlighted Apps & Content', 'Handpicked by our editorial team.', `<button onclick="navigate('/explore')" class="btn btn-secondary btn-sm">${t('viewAll')} <i class="fa-solid fa-arrow-right"></i></button>`)}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          ${DB.items.map(item => itemCard(item)).join('')}
+        </div>
+      </section>
+
+      <!-- BENEFITS -->
+      <section class="py-12">
+        ${sectionHeader('Architecture', 'Why GlobalWebsiteMaster?', 'Everything a modern website needs, built-in and configurable.')}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          ${[
+            { icon:'fa-palette', color:'#6366f1', title:'Design Token System', desc:'One token change rebrands colors, typography and spacing site-wide.' },
+            { icon:'fa-magnifying-glass', color:'#22c55e', title:'SEO-First Architecture', desc:'Dynamic meta, canonical, JSON-LD, sitemap and structured data built-in.' },
+            { icon:'fa-mobile-screen-button', color:'#06b6d4', title:'Mobile-First', desc:'Every component designed for mobile with progressive desktop enhancement.' },
+            { icon:'fa-toggle-on', color:'#f59e0b', title:'Feature Flags', desc:'Enable/disable Blog, Videos, Search, Newsletter and Admin from one config.' },
+            { icon:'fa-globe', color:'#ec4899', title:'Multilingual Ready', desc:'i18n strings, RTL/LTR, hreflang and locale routing architecture built-in.' },
+            { icon:'fa-shield-halved', color:'#a78bfa', title:'Security by Default', desc:'No secrets in client code, secure admin routes, validated inputs everywhere.' },
+          ].map(b=>`
+            <div class="glass rounded-xl border p-6" style="border-color:var(--color-border);">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:${b.color}20;">
+                <i class="fa-solid ${b.icon}" style="color:${b.color};"></i>
+              </div>
+              <h3 class="font-heading font-bold mb-2">${b.title}</h3>
+              <p class="text-muted text-sm">${b.desc}</p>
+            </div>`).join('')}
+        </div>
+      </section>
+
+      <!-- FEATURED ARTICLES -->
+      ${FEATURES.blog ? `
+      <section class="py-12">
+        ${sectionHeader('Blog', 'Latest Articles', 'In-depth guides, reviews and analysis.', `<button onclick="navigate('/blog')" class="btn btn-secondary btn-sm">${t('viewAll')} <i class="fa-solid fa-arrow-right"></i></button>`)}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          ${DB.articles.map(a=>articleCard(a,true)).join('')}
+        </div>
+      </section>` : ''}
+
+      <!-- VIDEOS PREVIEW -->
+      ${FEATURES.videos ? `
+      <section class="py-12">
+        ${sectionHeader('Videos', 'Watch & Learn', 'Hands-on demos, reviews and tutorials.', `<button onclick="navigate('/videos')" class="btn btn-secondary btn-sm">${t('viewAll')} <i class="fa-solid fa-arrow-right"></i></button>`)}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          ${DB.videos.map(v=>videoCard(v)).join('')}
+        </div>
+      </section>` : ''}
+
+      <!-- SEO HUBS -->
+      ${FEATURES.seo_hubs ? `
+      <section class="py-12">
+        ${sectionHeader('Explore Topics', 'SEO Content Hubs', 'Deep-dive into topic clusters with curated apps, articles and videos.')}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          ${DB.seo_hubs.map(h=>`
+            <button onclick="navigate('/hub/${h.slug}')" class="glass rounded-xl border p-6 text-left card-hover group" style="border-color:var(--color-border);">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background:${h.color}20;">
+                <i class="fa-solid ${h.icon}" style="color:${h.color};"></i>
+              </div>
+              <h3 class="font-heading font-bold text-base mb-1 group-hover:text-primary transition-colors" style="--tw-text-opacity:1;">${h.title}</h3>
+              <p class="text-muted text-xs">${h.description}</p>
+            </button>`).join('')}
+        </div>
+      </section>` : ''}
+
+      <!-- TESTIMONIALS -->
+      <section class="py-12">
+        ${sectionHeader('Reviews', 'What Users Say')}
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          ${DB.testimonials.map(testimonial=>`
+            <div class="glass rounded-xl border p-6" style="border-color:var(--color-border);">
+              <div class="flex gap-1 mb-3">${'<i class="fa-solid fa-star text-xs" style="color:var(--color-accent);"></i>'.repeat(testimonial.rating)}</div>
+              <p class="text-sm mb-4 leading-relaxed">"${testimonial.text}"</p>
+              <div class="flex items-center gap-3">
+                <img src="${testimonial.avatar}" alt="${testimonial.name}" loading="lazy" class="w-9 h-9 rounded-full" />
+                <div>
+                  <p class="font-semibold text-sm">${testimonial.name}</p>
+                  <p class="text-muted text-xs">${testimonial.role}</p>
+                </div>
+              </div>
+            </div>`).join('')}
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      ${FEATURES.faq ? faqSection(DB.faq.slice(0,4)) : ''}
+
+      <!-- NEWSLETTER -->
+      ${newsletterSection()}
+
+      <!-- CONTACT CTA -->
+      <section class="py-12">
+        <div class="text-center">
+          <h2 class="font-heading font-bold text-2xl sm:text-3xl mb-4">Ready to Build Your Next Website?</h2>
+          <p class="text-muted mb-6 max-w-md mx-auto">Start from GlobalWebsiteMaster and launch your brand in record time.</p>
+          <button onclick="navigate('/contact');Analytics.ctaClick('Footer CTA')" class="btn btn-primary btn-lg">
+            Get in Touch <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
+
+    </div><!-- /max-w-7xl -->
+
+    ${renderFooter()}
+  </div>`;
+  animateStats();
+}
+
+// ── EXPLORE ────────────────────────────────────────────────────
+function renderExplore() {
+  setSEO({ title:`Explore — ${SITE.name}`, description:'Browse all apps, tools and content.' });
+  let filtered = [...DB.items];
+  let activecat = 'all';
+  const app = document.getElementById('app-root');
+  const render = () => {
+    const grid = document.getElementById('explore-grid');
+    if (!grid) return;
+    grid.innerHTML = filtered.length
+      ? filtered.map(i => itemCard(i)).join('')
+      : emptyState('fa-compass','No items found','Try a different category.');
+  };
+  app.innerHTML = `
+  <div class="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Explore',path:'/explore'}])}
+    ${sectionHeader('Explore', 'All Apps & Content', 'Browse, filter and discover.')}
+    <!-- Category filter -->
+    <div class="flex gap-2 overflow-x-auto pb-3 mb-8 scrollbar-none">
+      <button onclick="filterExplore('all')" id="cat-all" class="btn btn-sm btn-secondary shrink-0 nav-active-bg">All</button>
+      ${DB.categories.map(c=>`<button onclick="filterExplore('${c.id}')" id="cat-${c.id}" class="btn btn-sm btn-secondary shrink-0">
+        <i class="fa-solid ${c.icon}" style="color:${c.color};"></i>${c.name}
+      </button>`).join('')}
+    </div>
+    <div id="explore-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    ${renderFooter()}
+  </div>`;
+  render();
+  window.filterExplore = (catId) => {
+    filtered = catId === 'all' ? DB.items : DB.items.filter(i=>i.category===catId);
+    document.querySelectorAll('[id^="cat-"]').forEach(b=>b.classList.remove('nav-active-bg'));
+    document.getElementById('cat-'+(catId==='all'?'all':catId))?.classList.add('nav-active-bg');
+    render();
+  };
+}
+
+// ── ITEM DETAIL ────────────────────────────────────────────────
+function renderItemDetail(slug) {
+  const item = DB.items.find(i=>i.slug===slug);
+  if (!item) return render404();
+  Analytics.articleView(item.id);
+  setSEO({
+    title: item.seo.title,
+    description: item.seo.description,
+    canonical: `${SITE.url}/explore/${slug}`,
+    image: item.coverImage,
+    jsonLd: {
+      '@context':'https://schema.org',
+      '@type':'SoftwareApplication',
+      name: item.name,
+      description: item.shortDescription,
+      applicationCategory:'MobileApplication',
+      operatingSystem: item.platforms.join(', '),
+      aggregateRating:{ '@type':'AggregateRating', ratingValue:item.rating, reviewCount:item.reviews },
+      offers:{ '@type':'Offer', price:'0', priceCurrency:'USD' },
+    },
+  });
+  const related = DB.items.filter(i=>item.relatedItems.includes(i.id));
+  const relatedArts = DB.articles.filter(a=>item.relatedArticles?.includes(a.id));
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Explore',path:'/explore'},{name:item.name,path:`/explore/${slug}`}])}
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row gap-6 mb-8">
+      <img src="${item.icon}" alt="${item.name} icon" loading="lazy" class="w-20 h-20 rounded-2xl border shrink-0" style="border-color:var(--color-border);" onerror="this.src='https://placehold.co/160x160/1e293b/6366f1?text=${item.name[0]}'" />
+      <div>
+        <div class="flex items-center gap-2 flex-wrap mb-2">
+          ${item.badge ? `<span class="badge ${item.badgeColor}">${item.badge}</span>` : ''}
+          <span class="badge badge-muted">${getCategoryName(item.category)}</span>
+        </div>
+        <h1 class="font-heading font-extrabold text-3xl sm:text-4xl mb-2">${item.name}</h1>
+        <p class="text-muted text-lg mb-3">${item.tagline}</p>
+        <div class="flex items-center gap-4 flex-wrap text-sm">
+          <div class="flex items-center gap-1">
+            <i class="fa-solid fa-star" style="color:var(--color-accent);"></i>
+            <strong>${item.rating}</strong>
+            <span class="text-muted">(${item.reviews.toLocaleString()} reviews)</span>
+          </div>
+          <span class="text-muted">${item.platforms.join(' · ')}</span>
+          <span class="text-muted">${t('updatedOn')} ${formatDate(item.updatedDate)}</span>
+        </div>
+      </div>
+    </div>
+    <!-- CTA Buttons -->
+    <div class="flex gap-3 mb-8 flex-wrap">
+      ${item.playStore ? `<a href="${item.playStore}" target="_blank" rel="noopener" class="btn btn-primary" onclick="Analytics.ctaClick('Download Android — ${item.name}')"><i class="fa-brands fa-google-play"></i> Google Play</a>` : ''}
+      ${item.appStore  ? `<a href="${item.appStore}"  target="_blank" rel="noopener" class="btn btn-secondary" onclick="Analytics.ctaClick('Download iOS — ${item.name}')"><i class="fa-brands fa-app-store-ios"></i> App Store</a>` : ''}
+    </div>
+    <!-- Cover -->
+    <img src="${item.coverImage}" alt="${item.name} screenshot" loading="lazy" class="w-full rounded-2xl mb-8 border" style="border-color:var(--color-border);max-height:400px;object-fit:cover;" onerror="this.src='https://placehold.co/1200x600/1e293b/6366f1?text=${encodeURIComponent(item.name)}'" />
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 space-y-8">
+        <!-- Description -->
+        <div>
+          <h2 class="font-heading font-bold text-xl mb-4">About ${item.name}</h2>
+          ${item.longDescription.split('\n\n').map(p=>`<p class="text-muted mb-3">${p}</p>`).join('')}
+        </div>
+        <!-- Features -->
+        <div>
+          <h2 class="font-heading font-bold text-xl mb-4">Key Features</h2>
+          <ul class="space-y-2">
+            ${item.features.map(f=>`<li class="flex items-center gap-3"><i class="fa-solid fa-circle-check shrink-0" style="color:var(--color-success);"></i><span>${f}</span></li>`).join('')}
+          </ul>
+        </div>
+        <!-- Use Cases -->
+        <div>
+          <h2 class="font-heading font-bold text-xl mb-4">Use Cases</h2>
+          <div class="flex flex-wrap gap-2">
+            ${item.useCases.map(u=>`<span class="badge badge-secondary">${u}</span>`).join('')}
+          </div>
+        </div>
+        <!-- Screenshots -->
+        ${item.screenshots?.length ? `
+        <div>
+          <h2 class="font-heading font-bold text-xl mb-4">Screenshots</h2>
+          <div class="flex gap-3 overflow-x-auto pb-2">
+            ${item.screenshots.map(s=>`<img src="${s}" alt="${item.name} screenshot" loading="lazy" class="rounded-xl border h-80 shrink-0" style="border-color:var(--color-border);" />`).join('')}
+          </div>
+        </div>` : ''}
+        <!-- FAQ -->
+        ${item.faq?.length ? faqSection(item.faq, true) : ''}
+        <!-- Related Articles -->
+        ${relatedArts.length ? `
+        <div>
+          <h2 class="font-heading font-bold text-xl mb-4">${t('relatedArticles')}</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            ${relatedArts.map(a=>articleCard(a)).join('')}
+          </div>
+        </div>` : ''}
+      </div>
+      <!-- Sidebar -->
+      <div class="space-y-6">
+        <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+          <h3 class="font-heading font-bold mb-4">App Info</h3>
+          <dl class="space-y-3 text-sm">
+            <div class="flex justify-between"><dt class="text-muted">Platforms</dt><dd>${item.platforms.join(', ')}</dd></div>
+            <div class="flex justify-between"><dt class="text-muted">Category</dt><dd>${getCategoryName(item.category)}</dd></div>
+            <div class="flex justify-between"><dt class="text-muted">Rating</dt><dd>${item.rating} ★</dd></div>
+            <div class="flex justify-between"><dt class="text-muted">Reviews</dt><dd>${item.reviews.toLocaleString()}</dd></div>
+            <div class="flex justify-between"><dt class="text-muted">Updated</dt><dd>${formatDate(item.updatedDate)}</dd></div>
+          </dl>
+        </div>
+        <!-- Languages -->
+        <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+          <h3 class="font-heading font-bold mb-3 text-sm">Languages</h3>
+          <div class="flex flex-wrap gap-1.5">
+            ${item.languages.map(l=>`<span class="badge badge-muted text-xs">${l}</span>`).join('')}
+          </div>
+        </div>
+        ${related.length ? `
+        <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+          <h3 class="font-heading font-bold mb-3 text-sm">${t('relatedItems')}</h3>
+          <div class="space-y-3">
+            ${related.map(r=>`
+              <div class="flex gap-3 cursor-pointer hover:opacity-80 transition-opacity" onclick="navigate('/explore/${r.slug}')">
+                <img src="${r.icon}" alt="${r.name}" loading="lazy" class="w-10 h-10 rounded-xl shrink-0" onerror="this.src='https://placehold.co/80x80/1e293b/6366f1?text=${r.name[0]}'" />
+                <div>
+                  <p class="font-semibold text-sm">${r.name}</p>
+                  <p class="text-muted text-xs">${r.tagline}</p>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>` : ''}
+      </div>
+    </div>
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── BLOG ───────────────────────────────────────────────────────
+function renderBlog() {
+  setSEO({ title:`Blog — ${SITE.name}`, description:'Articles, guides and analysis.', canonical:`${SITE.url}/blog`, jsonLd: { '@context':'https://schema.org','@type':'Blog','name':`${SITE.name} Blog`,'url':`${SITE.url}/blog` } });
+  const app = document.getElementById('app-root');
+  const published = DB.articles.filter(a=>a.status==='published');
+  app.innerHTML = `
+  <div class="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Blog',path:'/blog'}])}
+    ${sectionHeader('Blog', 'Latest Articles', 'Guides, reviews, analysis and more.')}
+    <!-- Featured -->
+    ${published.length ? `
+    <div class="mb-8 cursor-pointer" onclick="navigate('/blog/${published[0].slug}')">
+      <div class="glass rounded-2xl border overflow-hidden" style="border-color:var(--color-border);">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+          <img src="${published[0].coverImage}" alt="${published[0].title}" loading="lazy" class="w-full h-64 lg:h-auto object-cover" onerror="this.src='https://placehold.co/800x500/1e293b/6366f1?text=Article'" />
+          <div class="p-8 flex flex-col justify-center">
+            <span class="badge badge-primary mb-4">${t('featured')}</span>
+            <h2 class="font-heading font-bold text-2xl sm:text-3xl mb-3">${published[0].title}</h2>
+            <p class="text-muted mb-5">${published[0].excerpt}</p>
+            <div class="flex items-center gap-3 text-sm text-muted">
+              <span>${published[0].author}</span>
+              <span>·</span>
+              <span>${formatDate(published[0].publishDate)}</span>
+              <span>·</span>
+              <span>${published[0].readingTime} ${t('minuteRead')}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>` : ''}
+    <!-- Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      ${published.slice(1).map(a=>articleCard(a)).join('')}
+    </div>
+    ${newsletterSection()}
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── ARTICLE ────────────────────────────────────────────────────
+function renderArticle(slug) {
+  const art = DB.articles.find(a=>a.slug===slug);
+  if (!art) return render404();
+  Analytics.articleView(art.id);
+  setSEO({
+    title: art.seo.title,
+    description: art.seo.description,
+    canonical: `${SITE.url}/blog/${slug}`,
+    image: art.coverImage,
+    jsonLd: {
+      '@context':'https://schema.org','@type':'BlogPosting',
+      headline:art.title, description:art.excerpt,
+      image:art.coverImage, author:{'@type':'Person',name:art.author},
+      datePublished:art.publishDate, dateModified:art.updatedDate,
+      publisher:{'@type':'Organization',name:SITE.name},
+      mainEntityOfPage:{'@type':'WebPage','@id':`${SITE.url}/blog/${slug}`},
+    },
+  });
+  const relatedArts = DB.articles.filter(a=>art.relatedArticles?.includes(a.id));
+  const featuredItem = art.featuredItem ? DB.items.find(i=>i.id===art.featuredItem) : null;
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+      ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Blog',path:'/blog'},{name:art.title,path:`/blog/${slug}`}])}
+      <div class="mb-3 flex items-center gap-2 flex-wrap">
+        <span class="badge badge-primary">${getCategoryName(art.category)}</span>
+        ${art.tags.slice(0,3).map(t=>`<span class="badge badge-muted">#${t}</span>`).join('')}
+      </div>
+      <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl mb-4 leading-tight">${art.title}</h1>
+      <p class="text-xl text-muted mb-6">${art.subtitle}</p>
+      <div class="flex items-center gap-4 text-sm text-muted mb-8 flex-wrap">
+        <span class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold" style="background:var(--color-primary);">${art.author[0]}</div>
+          ${art.author}
+        </span>
+        <span><i class="fa-regular fa-calendar mr-1"></i>${formatDate(art.publishDate)}</span>
+        ${art.updatedDate !== art.publishDate ? `<span><i class="fa-solid fa-rotate mr-1"></i>${t('updatedOn')} ${formatDate(art.updatedDate)}</span>` : ''}
+        <span><i class="fa-regular fa-clock mr-1"></i>${art.readingTime} ${t('minuteRead')}</span>
+      </div>
+      <img src="${art.coverImage}" alt="${art.title} cover" loading="lazy" class="w-full rounded-2xl mb-8 border" style="border-color:var(--color-border);max-height:480px;object-fit:cover;" onerror="this.src='https://placehold.co/1200x600/1e293b/6366f1?text=Article'" />
+    </div>
+    <!-- Article content + sidebar -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+        <div class="lg:col-span-3">
+          <!-- TOC -->
+          ${art.toc?.length ? `
+          <div class="glass rounded-xl border p-5 mb-8" style="border-color:var(--color-border);">
+            <h3 class="font-heading font-bold text-sm mb-3">Table of Contents</h3>
+            <ol class="space-y-1 list-decimal list-inside">
+              ${art.toc.map(item=>`<li><a href="#${slugify(item)}" class="toc-link">${item}</a></li>`).join('')}
+            </ol>
+          </div>` : ''}
+          <!-- Body -->
+          <div class="article-body">${art.body}</div>
+          <!-- FAQ -->
+          ${art.faq?.length ? faqSection(art.faq, true) : ''}
+          <!-- Social share -->
+          <div class="my-8 p-5 glass rounded-xl border" style="border-color:var(--color-border);">
+            <p class="font-semibold mb-3 text-sm">Share this article</p>
+            <div class="flex gap-2">
+              <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(art.title)}&url=${encodeURIComponent(SITE.url+'/blog/'+slug)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm"><i class="fa-brands fa-twitter"></i> Twitter</a>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SITE.url+'/blog/'+slug)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
+          </div>
+          <!-- Related Articles -->
+          ${relatedArts.length ? `
+          <div class="mb-8">
+            <h2 class="font-heading font-bold text-xl mb-5">${t('relatedArticles')}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              ${relatedArts.map(a=>articleCard(a)).join('')}
+            </div>
+          </div>` : ''}
+        </div>
+        <!-- Sidebar -->
+        <aside class="space-y-6 lg:sticky lg:top-24 lg:self-start">
+          ${featuredItem ? `
+          <div class="glass rounded-xl border p-5 cursor-pointer" style="border-color:var(--color-border);" onclick="navigate('/explore/${featuredItem.slug}')">
+            <p class="text-xs font-bold uppercase tracking-wider text-muted mb-3">Featured App</p>
+            <div class="flex gap-3 items-center">
+              <img src="${featuredItem.icon}" alt="${featuredItem.name}" loading="lazy" class="w-12 h-12 rounded-xl" onerror="this.src='https://placehold.co/96x96/1e293b/6366f1?text=${featuredItem.name[0]}'" />
+              <div>
+                <p class="font-heading font-bold">${featuredItem.name}</p>
+                <p class="text-muted text-xs">${featuredItem.tagline}</p>
+              </div>
+            </div>
+            <div class="flex gap-2 mt-3">
+              <button class="btn btn-primary btn-sm flex-1 justify-center">View App</button>
+            </div>
+          </div>` : ''}
+          ${newsletterSection().replace('py-12','py-0')}
+          <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+            <p class="text-xs font-bold uppercase tracking-wider text-muted mb-3">Tags</p>
+            <div class="flex flex-wrap gap-2">
+              ${art.tags.map(t=>`<span class="badge badge-muted">#${t}</span>`).join('')}
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── VIDEOS ─────────────────────────────────────────────────────
+function renderVideos() {
+  setSEO({ title:`Videos — ${SITE.name}`, description:'Watch demos, tutorials and reviews.' });
+  const app = document.getElementById('app-root');
+  let view = 'grid'; // grid | reels
+  const renderContent = () => {
+    const c = document.getElementById('videos-content');
+    if (!c) return;
+    if (view==='reels') {
+      c.innerHTML = `<div class="reel-container">${DB.videos.map(v=>`
+        <div class="reel-item flex items-center justify-center relative bg-black" id="reel-${v.id}">
+          <video class="h-full w-full object-contain max-h-full" preload="metadata" poster="${v.thumbnail}" muted loop playsinline id="video-${v.id}">
+            <source src="${v.videoUrl}" type="video/mp4" />
+          </video>
+          <div class="absolute inset-0 flex items-center justify-center cursor-pointer" onclick="togglePlay('${v.id}')">
+            <div id="play-icon-${v.id}" class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 opacity-0 transition-opacity">
+              <i class="fa-solid fa-play text-white text-xl ml-1"></i>
+            </div>
+          </div>
+          <div class="absolute bottom-20 left-4 right-4 text-white">
+            <h3 class="font-heading font-bold text-lg mb-1">${v.title}</h3>
+            <p class="text-white/70 text-sm">${v.description}</p>
+          </div>
+          <div class="absolute top-4 right-4 flex flex-col gap-3">
+            <button onclick="toggleMute('${v.id}')" class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30" id="mute-btn-${v.id}">
+              <i class="fa-solid fa-volume-xmark text-white text-sm"></i>
+            </button>
+            <button onclick="navigate('/videos/${v.slug}')" class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+              <i class="fa-solid fa-arrow-up-right-from-square text-white text-sm"></i>
+            </button>
+          </div>
+        </div>`).join('')}
+      </div>`;
+      setupIntersectionPlayback();
+    } else {
+      c.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${DB.videos.map(v=>videoCard(v)).join('')}</div>`;
+    }
+  };
+  app.innerHTML = `
+  <div class="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Videos',path:'/videos'}])}
+    <div class="flex items-center justify-between mb-8">
+      <div>${sectionHeader('Videos','Watch & Learn','Demos, reviews and tutorials.','')}
+      </div>
+      <div class="flex gap-2">
+        <button onclick="window.setVideoView('grid')" id="btn-grid" class="btn btn-secondary btn-sm nav-active-bg"><i class="fa-solid fa-grid-2"></i> Grid</button>
+        <button onclick="window.setVideoView('reels')" id="btn-reels" class="btn btn-secondary btn-sm"><i class="fa-solid fa-film"></i> Reels</button>
+      </div>
+    </div>
+    <div id="videos-content"></div>
+    <div id="videos-footer">${renderFooter()}</div>
+  </div>`;
+  renderContent();
+  window.setVideoView = (v) => {
+    view = v;
+    document.getElementById('btn-grid')?.classList.toggle('nav-active-bg', v==='grid');
+    document.getElementById('btn-reels')?.classList.toggle('nav-active-bg', v==='reels');
+    document.getElementById('videos-footer').style.display = v==='reels'?'none':'block';
+    renderContent();
+  };
+}
+
+// ── VIDEO DETAIL ────────────────────────────────────────────────
+function renderVideoDetail(slug) {
+  const vid = DB.videos.find(v=>v.slug===slug);
+  if (!vid) return render404();
+  Analytics.videoView(vid.id);
+  setSEO({
+    title: vid.seo.title,
+    description: vid.seo.description,
+    canonical: `${SITE.url}/videos/${slug}`,
+    image: vid.thumbnail,
+    jsonLd: {
+      '@context':'https://schema.org','@type':'VideoObject',
+      name:vid.title, description:vid.description,
+      thumbnailUrl:vid.thumbnail, uploadDate:vid.publishDate,
+      publisher:{'@type':'Organization',name:SITE.name,logo:{'@type':'ImageObject',url:SITE.logo||SITE.url+'/logo.png'}},
+    },
+  });
+  const relatedVids = DB.videos.filter(v=>v.id!==vid.id).slice(0,3);
+  const relatedItem  = vid.relatedItem ? DB.items.find(i=>i.id===vid.relatedItem) : null;
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Videos',path:'/videos'},{name:vid.title,path:`/videos/${slug}`}])}
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <!-- Player -->
+        <div class="rounded-2xl overflow-hidden border mb-5" style="border-color:var(--color-border);">
+          <video id="main-video" class="w-full aspect-16-9 bg-black" poster="${vid.thumbnail}" controls preload="metadata">
+            <source src="${vid.videoUrl}" type="video/mp4" />
+            <p>Your browser does not support video playback.</p>
+          </video>
+        </div>
+        <h1 class="font-heading font-extrabold text-2xl sm:text-3xl mb-3">${vid.title}</h1>
+        <div class="flex items-center gap-4 text-sm text-muted mb-4 flex-wrap">
+          <span><i class="fa-regular fa-eye mr-1"></i>${vid.views.toLocaleString()} views</span>
+          <span><i class="fa-regular fa-calendar mr-1"></i>${formatDate(vid.publishDate)}</span>
+          <span class="badge badge-secondary">${getCategoryName(vid.category)}</span>
+          ${vid.tags.slice(0,3).map(t=>`<span class="badge badge-muted">#${t}</span>`).join('')}
+        </div>
+        <div class="glass rounded-xl border p-5 mb-6" style="border-color:var(--color-border);">
+          <p class="text-muted">${vid.description}</p>
+        </div>
+        <!-- Related Videos -->
+        <h2 class="font-heading font-bold text-xl mb-4">${t('relatedVideos')}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          ${relatedVids.map(v=>videoCard(v)).join('')}
+        </div>
+      </div>
+      <!-- Sidebar -->
+      <aside class="space-y-5">
+        ${relatedItem ? `
+        <div class="glass rounded-xl border p-5 cursor-pointer" style="border-color:var(--color-border);" onclick="navigate('/explore/${relatedItem.slug}')">
+          <p class="text-xs font-bold uppercase tracking-wider text-muted mb-3">Featured In This Video</p>
+          ${itemCard(relatedItem,true)}
+        </div>` : ''}
+        ${newsletterSection().replace('py-12','py-0')}
+      </aside>
+    </div>
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── CATEGORY HUB ────────────────────────────────────────────────
+function renderCategoryHub(slug) {
+  const cat = DB.categories.find(c=>c.slug===slug);
+  if (!cat) return render404();
+  setSEO({ title:`${cat.name} — ${SITE.name}`, description:`Browse all ${cat.name} content.`, canonical:`${SITE.url}/category/${slug}` });
+  const items = DB.items.filter(i=>i.category===cat.id);
+  const arts   = DB.articles.filter(a=>a.category===cat.id);
+  const vids   = DB.videos.filter(v=>v.category===cat.id);
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:cat.name,path:`/category/${slug}`}])}
+    <div class="flex items-center gap-4 mb-8">
+      <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:${cat.color}25;">
+        <i class="fa-solid ${cat.icon} text-2xl" style="color:${cat.color};"></i>
+      </div>
+      <div>
+        <h1 class="font-heading font-extrabold text-3xl">${cat.name}</h1>
+        <p class="text-muted">${cat.count} items in this category</p>
+      </div>
+    </div>
+    ${items.length ? `<div class="mb-12">${sectionHeader('','Apps & Content')}<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${items.map(i=>itemCard(i)).join('')}</div></div>` : ''}
+    ${arts.length  ? `<div class="mb-12">${sectionHeader('','Articles')}<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">${arts.map(a=>articleCard(a)).join('')}</div></div>` : ''}
+    ${vids.length  ? `<div class="mb-12">${sectionHeader('','Videos')}<div class="grid grid-cols-1 sm:grid-cols-3 gap-5">${vids.map(v=>videoCard(v)).join('')}</div></div>` : ''}
+    ${!items.length && !arts.length && !vids.length ? emptyState('fa-folder-open','No content yet','Check back soon.') : ''}
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── SEO HUB ─────────────────────────────────────────────────────
+function renderSeoHub(slug) {
+  const hub = DB.seo_hubs.find(h=>h.slug===slug);
+  if (!hub) return render404();
+  setSEO({ title:`${hub.title} — ${SITE.name}`, description:hub.description, canonical:`${SITE.url}/hub/${slug}`, jsonLd:breadcrumbsLD([{name:'Home',path:'/'},{name:hub.title,path:`/hub/${slug}`}]) });
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Topics',path:'/'},{name:hub.title,path:`/hub/${slug}`}])}
+    <div class="mb-10 text-center">
+      <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:${hub.color}20;">
+        <i class="fa-solid ${hub.icon} text-2xl" style="color:${hub.color};"></i>
+      </div>
+      <h1 class="font-heading font-extrabold text-4xl mb-3">${hub.title}</h1>
+      <p class="text-muted text-lg max-w-xl mx-auto">${hub.description}</p>
+    </div>
+    ${sectionHeader('','Featured Apps','Top-rated apps in this category.','')}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      ${DB.items.slice(0,3).map(i=>itemCard(i)).join('')}
+    </div>
+    ${sectionHeader('','Related Articles','')}
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
+      ${DB.articles.slice(0,2).map(a=>articleCard(a)).join('')}
+    </div>
+    ${faqSection(DB.faq.slice(0,3),false)}
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── ABOUT ─────────────────────────────────────────────────────
+function renderAbout() {
+  setSEO({ title:`About — ${SITE.name}`, description:`Learn about ${SITE.name} and our mission.` });
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'About',path:'/about'}])}
+    <h1 class="font-heading font-extrabold text-4xl mb-4">About Us</h1>
+    <p class="text-muted text-lg mb-8">This page is configurable. Replace with your company story, team and mission.</p>
+    <div class="glass rounded-2xl border p-8 mb-8" style="border-color:var(--color-border);">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div>
+          <h2 class="font-heading font-bold text-xl mb-3">Our Mission</h2>
+          <p class="text-muted">Configure your mission statement here via the SITE config or Admin CMS. Make it compelling and authentic.</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-bold text-xl mb-3">Our Vision</h2>
+          <p class="text-muted">Describe your vision for the future here. What impact do you want to create in the world?</p>
+        </div>
+        <div>
+          <h2 class="font-heading font-bold text-xl mb-3">Company Info</h2>
+          <dl class="space-y-2 text-sm">
+            <div class="flex justify-between"><dt class="text-muted">Name</dt><dd>${SITE.companyInfo.name}</dd></div>
+            <div class="flex justify-between"><dt class="text-muted">Founded</dt><dd>${SITE.companyInfo.founded}</dd></div>
+            <div class="flex justify-between"><dt class="text-muted">Location</dt><dd>${SITE.companyInfo.address}</dd></div>
+          </dl>
+        </div>
+        <div>
+          <h2 class="font-heading font-bold text-xl mb-3">Contact</h2>
+          <p class="text-muted text-sm">${SITE.contactEmail}</p>
+          <button onclick="navigate('/contact')" class="btn btn-primary btn-sm mt-3">Get in Touch</button>
+        </div>
+      </div>
+    </div>
+    ${statsSection()}
+    ${renderFooter()}
+  </div>`;
+  animateStats();
+}
+
+// ── CONTACT ────────────────────────────────────────────────────
+function renderContact() {
+  setSEO({ title:`Contact — ${SITE.name}`, description:`Get in touch with ${SITE.name}.` });
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Contact',path:'/contact'}])}
+    <h1 class="font-heading font-extrabold text-4xl mb-3">Get in Touch</h1>
+    <p class="text-muted text-lg mb-10">We'd love to hear from you. Fill out the form below and we'll get back to you promptly.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <div class="glass rounded-2xl border p-6 sm:p-8" style="border-color:var(--color-border);">
+          <form onsubmit="handleContact(event)" class="space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="form-label">Name *</label>
+                <input name="name" type="text" class="form-input" required placeholder="Your full name" />
+              </div>
+              <div>
+                <label class="form-label">Email *</label>
+                <input name="email" type="email" class="form-input" required placeholder="your@email.com" />
+              </div>
+            </div>
+            <div>
+              <label class="form-label">Subject</label>
+              <select name="subject" class="form-select">
+                <option value="">Select a subject</option>
+                <option value="general">General Enquiry</option>
+                <option value="support">Technical Support</option>
+                <option value="business">Business Partnership</option>
+                <option value="press">Press / Media</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label">Message *</label>
+              <textarea name="message" class="form-textarea" required placeholder="How can we help?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-full justify-center">${t('sendMessage')} <i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+      <!-- Contact info -->
+      <aside class="space-y-5">
+        ${[
+          { icon:'fa-envelope', label:'Email', value:SITE.contactEmail },
+          { icon:'fa-headset',  label:'Support', value:SITE.supportEmail },
+        ].map(c=>`
+          <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+            <i class="fa-solid ${c.icon} text-primary mb-2" style="color:var(--color-primary-light);"></i>
+            <p class="font-semibold text-sm">${c.label}</p>
+            <p class="text-muted text-sm">${c.value}</p>
+          </div>`).join('')}
+        <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+          <p class="font-semibold text-sm mb-3">Follow Us</p>
+          <div class="flex gap-2 flex-wrap">
+            ${Object.entries(SITE.socialLinks).filter(([,v])=>v).map(([k,v])=>`
+              <a href="${v}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" aria-label="${k}">
+                <i class="fa-brands fa-${k}"></i>
+              </a>`).join('')}
+          </div>
+        </div>
+      </aside>
+    </div>
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── SUPPORT ────────────────────────────────────────────────────
+function renderSupport() {
+  setSEO({ title:`Support — ${SITE.name}`, description:`Get support and find answers.` });
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Support',path:'/support'}])}
+    <h1 class="font-heading font-extrabold text-4xl mb-3">Support Center</h1>
+    <p class="text-muted mb-10">Find answers, documentation and contact options.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
+      ${[
+        { icon:'fa-book-open', label:'Documentation', desc:'Detailed guides and API references.', action:'navigate(\'/blog\')', btn:'Browse Docs' },
+        { icon:'fa-comments', label:'Community', desc:'Join our community for tips and discussions.', action:'', btn:'Coming Soon' },
+        { icon:'fa-envelope', label:'Email Support', desc:'Reach our support team directly.', action:`navigate('/contact')`, btn:'Contact Us' },
+      ].map(s=>`
+        <div class="glass rounded-xl border p-6 text-center" style="border-color:var(--color-border);">
+          <i class="fa-solid ${s.icon} text-2xl mb-3" style="color:var(--color-primary-light);"></i>
+          <h3 class="font-heading font-bold mb-2">${s.label}</h3>
+          <p class="text-muted text-sm mb-4">${s.desc}</p>
+          <button onclick="${s.action}" class="btn btn-secondary btn-sm w-full justify-center">${s.btn}</button>
+        </div>`).join('')}
+    </div>
+    ${faqSection()}
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── SEARCH ─────────────────────────────────────────────────────
+function renderSearch() {
+  const q = new URLSearchParams(location.hash.split('?')[1]||'').get('q') || '';
+  setSEO({ title:`Search: ${q} — ${SITE.name}`, robots:'noindex' });
+  const results = q ? globalSearch(q) : [];
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    <h1 class="font-heading font-extrabold text-3xl mb-6">Search Results</h1>
+    <form onsubmit="handleSearchForm(event)" class="mb-8">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-muted"></i>
+        <input id="page-search" value="${escapeHtml(q)}" class="search-input text-base py-3 pl-12" placeholder="Search…" />
+      </div>
+    </form>
+    ${q ? `<p class="text-muted mb-6">${results.length} result${results.length!==1?'s':''} for "<strong class="text-white">${escapeHtml(q)}</strong>"</p>` : ''}
+    <div class="space-y-4">
+      ${results.length ? results.map(r=>`
+        <div class="glass rounded-xl border p-5 card-hover" style="border-color:var(--color-border);" onclick="navigate('${r.route}')">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="badge ${r.typeBadge} text-xs">${r.type}</span>
+          </div>
+          <h3 class="font-heading font-bold">${highlight(r.title, q)}</h3>
+          <p class="text-muted text-sm mt-1">${highlight(r.excerpt, q)}</p>
+        </div>`).join('')
+      : q ? emptyState('fa-magnifying-glass','No results found','Try different keywords or browse categories.') : ''}
+    </div>
+    ${renderFooter()}
+  </div>`;
+  window.handleSearchForm = (e) => {
+    e.preventDefault();
+    const val = document.getElementById('page-search')?.value?.trim();
+    if (val) navigate('/search?q='+encodeURIComponent(val));
+  };
+}
+
+// ── PRIVACY ────────────────────────────────────────────────────
+function renderPrivacy() {
+  setSEO({ title:`Privacy Policy — ${SITE.name}`, description:`Privacy policy for ${SITE.name}.` });
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-3xl mx-auto px-4 sm:px-6 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Privacy Policy',path:'/privacy'}])}
+    <h1 class="font-heading font-extrabold text-4xl mb-3">Privacy Policy</h1>
+    <p class="text-muted mb-8">Last updated: ${formatDate(new Date().toISOString().split('T')[0])}</p>
+    <div class="glass rounded-2xl border p-8 article-body space-y-6" style="border-color:var(--color-border);">
+      <div class="p-4 rounded-lg border border-yellow-500/30 bg-yellow-500/10 text-yellow-200 text-sm mb-6">
+        ⚠️ <strong>Template Notice:</strong> This is a configurable privacy policy template. Replace all placeholder content with legally accurate information for your jurisdiction before publishing. Consult a legal professional.
+      </div>
+      <h2>1. Information We Collect</h2>
+      <p>We collect information you provide directly, such as when you subscribe to our newsletter, contact us, or create an account. This may include name, email address and message content.</p>
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the information we collect to provide and improve our services, send newsletters if you opt in, respond to inquiries, and comply with legal obligations.</p>
+      <h2>3. Data Storage & Security</h2>
+      <p>We implement industry-standard security measures to protect your personal information. Data is stored on secure servers. We retain data only as long as necessary for the purposes described in this policy.</p>
+      <h2>4. Cookies</h2>
+      <p>We use essential cookies for site functionality and analytics cookies (if analytics is enabled) to understand site usage. You may disable cookies in your browser settings.</p>
+      <h2>5. Third-Party Services</h2>
+      <p>We may use third-party services for analytics, video hosting and email delivery. These providers have their own privacy policies governing their use of your data.</p>
+      <h2>6. Your Rights</h2>
+      <p>Depending on your jurisdiction, you may have rights to access, correct, or delete your personal data. Contact us at <a href="mailto:${SITE.contactEmail}" class="text-primary">${SITE.contactEmail}</a> to exercise these rights.</p>
+      <h2>7. Contact</h2>
+      <p>For privacy-related questions: <a href="mailto:${SITE.contactEmail}" class="text-primary">${SITE.contactEmail}</a></p>
+    </div>
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── TERMS ──────────────────────────────────────────────────────
+function renderTerms() {
+  setSEO({ title:`Terms of Service — ${SITE.name}`, description:`Terms of service for ${SITE.name}.` });
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-3xl mx-auto px-4 sm:px-6 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Terms of Service',path:'/terms'}])}
+    <h1 class="font-heading font-extrabold text-4xl mb-3">Terms of Service</h1>
+    <p class="text-muted mb-8">Last updated: ${formatDate(new Date().toISOString().split('T')[0])}</p>
+    <div class="glass rounded-2xl border p-8 article-body space-y-6" style="border-color:var(--color-border);">
+      <div class="p-4 rounded-lg border border-yellow-500/30 bg-yellow-500/10 text-yellow-200 text-sm mb-6">
+        ⚠️ <strong>Template Notice:</strong> Replace all placeholder content with legally accurate terms for your jurisdiction before publishing. Consult a legal professional.
+      </div>
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing and using this website, you accept and agree to be bound by these Terms of Service. If you do not agree, please do not use this site.</p>
+      <h2>2. Use of Service</h2>
+      <p>You agree to use this service only for lawful purposes and in a manner that does not infringe on the rights of others. You may not use this service for any unlawful or prohibited activity.</p>
+      <h2>3. Intellectual Property</h2>
+      <p>All content on this site, including text, graphics, logos and code, is owned by ${SITE.companyInfo.name} unless otherwise stated. Unauthorized reproduction is prohibited.</p>
+      <h2>4. Disclaimer of Warranties</h2>
+      <p>This service is provided "as is" without warranties of any kind. We do not guarantee uninterrupted, error-free service.</p>
+      <h2>5. Limitation of Liability</h2>
+      <p>${SITE.companyInfo.name} shall not be liable for any indirect, incidental, special or consequential damages arising from your use of this service.</p>
+      <h2>6. Changes to Terms</h2>
+      <p>We reserve the right to modify these terms at any time. Continued use of the service constitutes acceptance of revised terms.</p>
+      <h2>7. Contact</h2>
+      <p>Questions? Contact us at <a href="mailto:${SITE.contactEmail}" class="text-primary">${SITE.contactEmail}</a></p>
+    </div>
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── SITEMAP PAGE ────────────────────────────────────────────────
+function renderSitemapPage() {
+  setSEO({ title:`Sitemap — ${SITE.name}`, description:`Full sitemap of ${SITE.name}.` });
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    ${breadcrumbsHTML([{name:'Home',path:'/'},{name:'Sitemap',path:'/sitemap'}])}
+    <h1 class="font-heading font-extrabold text-4xl mb-8">Sitemap</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      ${[
+        { title:'Main Pages', links:[{l:'Home',r:'/'},{l:'Explore',r:'/explore'},{l:'Videos',r:'/videos'},{l:'Blog',r:'/blog'},{l:'About',r:'/about'},{l:'Contact',r:'/contact'},{l:'Support',r:'/support'}] },
+        { title:'Apps & Content', links:DB.items.map(i=>({l:i.name,r:`/explore/${i.slug}`})) },
+        { title:'Articles', links:DB.articles.map(a=>({l:a.title,r:`/blog/${a.slug}`})) },
+        { title:'Videos', links:DB.videos.map(v=>({l:v.title,r:`/videos/${v.slug}`})) },
+        { title:'Categories', links:DB.categories.map(c=>({l:c.name,r:`/category/${c.slug}`})) },
+        { title:'Legal & Info', links:[{l:'Privacy Policy',r:'/privacy'},{l:'Terms of Service',r:'/terms'},{l:'Sitemap',r:'/sitemap'}] },
+      ].map(s=>`
+        <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+          <h2 class="font-heading font-bold text-base mb-4 text-muted uppercase tracking-wide text-xs">${s.title}</h2>
+          <ul class="space-y-2">
+            ${s.links.map(l=>`<li><a onclick="navigate('${l.r}')" class="text-sm text-muted hover:text-white transition-colors cursor-pointer flex items-center gap-2"><i class="fa-solid fa-link text-xs opacity-40"></i>${l.l}</a></li>`).join('')}
+          </ul>
+        </div>`).join('')}
+    </div>
+    ${renderFooter()}
+  </div>`;
+}
+
+// ── 404 ────────────────────────────────────────────────────────
+function render404() {
+  setSEO({ title:`404 — Page Not Found — ${SITE.name}`, robots:'noindex' });
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter flex flex-col items-center justify-center min-h-screen text-center px-4">
+    <div class="text-8xl font-heading font-extrabold gradient-text mb-4">404</div>
+    <h1 class="font-heading font-bold text-3xl mb-3">Page Not Found</h1>
+    <p class="text-muted max-w-sm mb-8">The page you're looking for doesn't exist or has been moved.</p>
+    <div class="flex gap-3 flex-wrap justify-center">
+      <button onclick="navigate('/')" class="btn btn-primary"><i class="fa-solid fa-house"></i> Go Home</button>
+      <button onclick="openSearch()" class="btn btn-secondary"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+    </div>
+  </div>`;
+}
+
+// ── ADMIN ──────────────────────────────────────────────────────
+function renderAdmin(path) {
+  if (!FEATURES.admin) return render404();
+  // Simple demo admin auth guard
+  const adminLoggedIn = sessionStorage.getItem('gwm_admin') === 'true';
+  if (!adminLoggedIn && path !== '/admin/login') {
+    renderAdminLogin();
+    return;
+  }
+  setSEO({ title:`Admin — ${SITE.name}`, robots:'noindex, nofollow' });
+  const section = path.replace('/admin','').replace('/','') || 'dashboard';
+  const adminNav = [
+    { key:'dashboard', label:'Dashboard', icon:'fa-gauge-high' },
+    { key:'items',     label:'Items',     icon:'fa-grid-2' },
+    { key:'articles',  label:'Articles',  icon:'fa-newspaper' },
+    { key:'videos',    label:'Videos',    icon:'fa-play-circle' },
+    { key:'newsletter',label:'Newsletter',icon:'fa-envelope' },
+    { key:'messages',  label:'Messages',  icon:'fa-messages' },
+    { key:'analytics', label:'Analytics', icon:'fa-chart-line' },
+    { key:'seo',       label:'SEO',       icon:'fa-magnifying-glass-chart' },
+    { key:'settings',  label:'Settings',  icon:'fa-sliders' },
+    { key:'docs',      label:'Docs',      icon:'fa-book' },
+  ];
+  const renderAdminSection = (s) => {
+    const subs = DB.newsletter_subscribers;
+    const msgs = DB.contact_messages;
+    const events = Analytics.events;
+    switch(s) {
+      case 'dashboard': return `
+        <h2 class="font-heading font-bold text-2xl mb-6">Dashboard</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          ${[
+            { label:'Items',        value:DB.items.length,    icon:'fa-grid-2',    color:'var(--color-primary-light)' },
+            { label:'Articles',     value:DB.articles.length, icon:'fa-newspaper', color:'var(--color-secondary)' },
+            { label:'Videos',       value:DB.videos.length,   icon:'fa-play',      color:'var(--color-accent)' },
+            { label:'Subscribers',  value:subs.length,        icon:'fa-envelope',  color:'var(--color-success)' },
+          ].map(card=>`
+            <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+              <i class="fa-solid ${card.icon} mb-2" style="color:${card.color};"></i>
+              <div class="text-2xl font-heading font-bold">${card.value}</div>
+              <p class="text-muted text-sm">${card.label}</p>
+            </div>`).join('')}
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+            <h3 class="font-heading font-bold mb-4">Recent Analytics Events</h3>
+            ${events.length ? `<div class="space-y-2">${events.slice(-8).reverse().map(e=>`
+              <div class="flex justify-between text-sm">
+                <span class="badge badge-primary text-xs">${e.event}</span>
+                <span class="text-muted text-xs">${e.data?.path||''}</span>
+                <span class="text-muted text-xs">${new Date(e.ts).toLocaleTimeString()}</span>
+              </div>`).join('')}</div>`
+            : `<p class="text-muted text-sm">No events yet.</p>`}
+          </div>
+          <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+            <h3 class="font-heading font-bold mb-4">Quick Links</h3>
+            <div class="space-y-2">
+              ${adminNav.filter(n=>n.key!=='dashboard').map(n=>`
+                <button onclick="navigate('/admin/${n.key}')" class="flex items-center gap-3 w-full text-left p-2 rounded-lg hover:bg-surface-alt transition-colors text-sm" style="">
+                  <i class="fa-solid ${n.icon} text-muted w-4"></i>${n.label}
+                </button>`).join('')}
+            </div>
+          </div>
+        </div>`;
+      case 'items': return `
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="font-heading font-bold text-2xl">Items</h2>
+          <button class="btn btn-primary btn-sm" onclick="showToast('Use CMS or DB to add items','info')"><i class="fa-solid fa-plus"></i> New Item</button>
+        </div>
+        <div class="table-wrapper glass rounded-xl border overflow-hidden" style="border-color:var(--color-border);">
+          <table class="admin-table">
+            <thead><tr><th>Name</th><th>Category</th><th>Rating</th><th>Status</th><th>Updated</th><th></th></tr></thead>
+            <tbody>${DB.items.map(i=>`
+              <tr>
+                <td class="flex items-center gap-3"><img src="${i.icon}" alt="${i.name}" class="w-8 h-8 rounded-lg" onerror="this.src='https://placehold.co/64x64/1e293b/6366f1?text=${i.name[0]}'" /><strong>${i.name}</strong></td>
+                <td class="text-muted">${getCategoryName(i.category)}</td>
+                <td>${i.rating}★</td>
+                <td><span class="badge ${i.status==='published'?'badge-success':'badge-muted'}">${i.status}</span></td>
+                <td class="text-muted text-xs">${formatDate(i.updatedDate)}</td>
+                <td><button onclick="navigate('/explore/${i.slug}')" class="btn btn-ghost btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
+      case 'articles': return `
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="font-heading font-bold text-2xl">Articles</h2>
+          <button class="btn btn-primary btn-sm" onclick="showToast('Use CMS or DB to add articles','info')"><i class="fa-solid fa-plus"></i> New Article</button>
+        </div>
+        <div class="glass rounded-xl border overflow-hidden" style="border-color:var(--color-border);">
+          <table class="admin-table">
+            <thead><tr><th>Title</th><th>Author</th><th>Category</th><th>Status</th><th>Published</th><th>SEO</th><th></th></tr></thead>
+            <tbody>${DB.articles.map(a=>`
+              <tr>
+                <td><strong class="text-sm">${a.title}</strong></td>
+                <td class="text-muted text-xs">${a.author}</td>
+                <td class="text-muted text-xs">${getCategoryName(a.category)}</td>
+                <td><span class="badge ${a.status==='published'?'badge-success':'badge-muted'}">${a.status}</span></td>
+                <td class="text-muted text-xs">${formatDate(a.publishDate)}</td>
+                <td>
+                  ${!a.seo.title?'<span class="text-red-400 text-xs">No title</span>':''}
+                  ${!a.seo.description?'<span class="text-red-400 text-xs">No desc</span>':''}
+                  ${a.seo.title&&a.seo.description?'<span class="text-green-400 text-xs">✓ OK</span>':''}
+                </td>
+                <td><button onclick="navigate('/blog/${a.slug}')" class="btn btn-ghost btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
+      case 'videos': return `
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="font-heading font-bold text-2xl">Videos</h2>
+          <button class="btn btn-primary btn-sm" onclick="showToast('Use CMS or DB to add videos','info')"><i class="fa-solid fa-plus"></i> New Video</button>
+        </div>
+        <div class="glass rounded-xl border overflow-hidden" style="border-color:var(--color-border);">
+          <table class="admin-table">
+            <thead><tr><th>Title</th><th>Category</th><th>Views</th><th>Duration</th><th>Status</th><th></th></tr></thead>
+            <tbody>${DB.videos.map(v=>`
+              <tr>
+                <td><strong class="text-sm">${v.title}</strong></td>
+                <td class="text-muted text-xs">${getCategoryName(v.category)}</td>
+                <td>${v.views.toLocaleString()}</td>
+                <td class="text-muted text-xs">${v.duration}</td>
+                <td><span class="badge ${v.status==='published'?'badge-success':'badge-muted'}">${v.status}</span></td>
+                <td><button onclick="navigate('/videos/${v.slug}')" class="btn btn-ghost btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
+      case 'newsletter': return `
+        <h2 class="font-heading font-bold text-2xl mb-6">Newsletter Subscribers</h2>
+        <div class="glass rounded-xl border p-5 mb-4" style="border-color:var(--color-border);">
+          <p class="font-bold text-3xl">${subs.length}</p>
+          <p class="text-muted text-sm">Total subscribers</p>
+        </div>
+        ${subs.length ? `<div class="glass rounded-xl border overflow-hidden" style="border-color:var(--color-border);"><table class="admin-table"><thead><tr><th>Email</th><th>Date</th></tr></thead><tbody>${subs.map(s=>`<tr><td>${s.email}</td><td class="text-muted text-xs">${formatDate(s.date)}</td></tr>`).join('')}</tbody></table></div>`
+        : `<div class="glass rounded-xl border p-8 text-center" style="border-color:var(--color-border);"><p class="text-muted">No subscribers yet.</p></div>`}`;
+      case 'messages': return `
+        <h2 class="font-heading font-bold text-2xl mb-6">Contact Messages</h2>
+        ${msgs.length ? `<div class="space-y-4">${msgs.map(m=>`
+          <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+            <div class="flex justify-between mb-2"><strong>${m.name}</strong><span class="text-muted text-xs">${formatDate(m.date)}</span></div>
+            <p class="text-muted text-xs mb-1">${m.email} · ${m.subject}</p>
+            <p class="text-sm">${m.message}</p>
+          </div>`).join('')}</div>`
+        : `<div class="glass rounded-xl border p-8 text-center" style="border-color:var(--color-border);"><p class="text-muted">No messages yet.</p></div>`}`;
+      case 'analytics': return `
+        <h2 class="font-heading font-bold text-2xl mb-6">Analytics Overview</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          ${['page_view','cta_click','search','newsletter_signup'].map(ev=>`
+            <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+              <p class="text-2xl font-bold">${events.filter(e=>e.event===ev).length}</p>
+              <p class="text-muted text-sm">${ev.replace('_',' ')}</p>
+            </div>`).join('')}
+        </div>
+        <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+          <h3 class="font-heading font-bold mb-4">Event Log (last 20)</h3>
+          ${events.length ? `<table class="admin-table"><thead><tr><th>Event</th><th>Path</th><th>Time</th></tr></thead><tbody>${events.slice(-20).reverse().map(e=>`<tr><td><span class="badge badge-primary text-xs">${e.event}</span></td><td class="text-muted text-xs">${e.data?.path||''}</td><td class="text-muted text-xs">${new Date(e.ts).toLocaleString()}</td></tr>`).join('')}</tbody></table>`
+          : `<p class="text-muted">No events tracked yet.</p>`}
+        </div>`;
+      case 'seo': return `
+        <h2 class="font-heading font-bold text-2xl mb-6">SEO Overview</h2>
+        <div class="space-y-4">
+          <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+            <h3 class="font-heading font-bold mb-4">SEO Health Check</h3>
+            <div class="space-y-3">
+              ${[
+                ...DB.articles.map(a=>({ type:'Article', name:a.title, slug:a.slug, prefix:'/blog', hasTitle:!!a.seo.title, hasDesc:!!a.seo.description, hasImage:!!a.coverImage })),
+                ...DB.items.map(i=>({ type:'Item', name:i.name, slug:i.slug, prefix:'/explore', hasTitle:!!i.seo.title, hasDesc:!!i.seo.description, hasImage:!!i.coverImage })),
+                ...DB.videos.map(v=>({ type:'Video', name:v.title, slug:v.slug, prefix:'/videos', hasTitle:!!v.seo.title, hasDesc:!!v.seo.description, hasImage:!!v.thumbnail })),
+              ].map(p=>`
+                <div class="flex items-center gap-3 text-sm">
+                  <span class="badge badge-muted text-xs w-14 justify-center">${p.type}</span>
+                  <span class="flex-1 truncate">${p.name}</span>
+                  <div class="flex gap-2 shrink-0">
+                    <span class="text-xs ${p.hasTitle?'text-green-400':'text-red-400'}" title="SEO Title">${p.hasTitle?'✓T':'✗T'}</span>
+                    <span class="text-xs ${p.hasDesc?'text-green-400':'text-red-400'}" title="Meta Desc">${p.hasDesc?'✓D':'✗D'}</span>
+                    <span class="text-xs ${p.hasImage?'text-green-400':'text-red-400'}" title="Image">${p.hasImage?'✓I':'✗I'}</span>
+                  </div>
+                </div>`).join('')}
+            </div>
+            <p class="text-muted text-xs mt-4">T = SEO Title · D = Meta Description · I = Image</p>
+          </div>
+        </div>`;
+      case 'settings': return `
+        <h2 class="font-heading font-bold text-2xl mb-6">Site Settings</h2>
+        <div class="glass rounded-2xl border p-6" style="border-color:var(--color-border);">
+          <div class="space-y-4">
+            ${[
+              { label:'Site Name', value:SITE.name },
+              { label:'Tagline',   value:SITE.tagline },
+              { label:'URL',       value:SITE.url },
+              { label:'Contact Email', value:SITE.contactEmail },
+              { label:'Default Language', value:SITE.defaultLanguage },
+              { label:'Analytics ID', value:SITE.analyticsId || '(not configured)' },
+            ].map(s=>`
+              <div class="grid grid-cols-2 items-center gap-4 py-3 border-b" style="border-color:var(--color-border);">
+                <label class="text-sm font-semibold">${s.label}</label>
+                <input class="form-input" value="${escapeHtml(s.value)}" readonly onclick="showToast('Edit SITE config in source to change this value','info')" />
+              </div>`).join('')}
+          </div>
+          <div class="mt-6">
+            <h3 class="font-heading font-bold mb-4">Feature Flags</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              ${Object.entries(FEATURES).map(([k,v])=>`
+                <div class="flex items-center justify-between p-3 glass rounded-lg border" style="border-color:var(--color-border);">
+                  <span class="text-sm">${k}</span>
+                  <span class="badge ${v?'badge-success':'badge-muted'}">${v?'ON':'OFF'}</span>
+                </div>`).join('')}
+            </div>
+          </div>
+        </div>`;
+      case 'docs': return renderAdminDocs();
+      default: return `<h2 class="font-heading font-bold text-2xl mb-4">${s.charAt(0).toUpperCase()+s.slice(1)}</h2><p class="text-muted">This admin section is ready. Connect to your database to populate it.</p>`;
+    }
+  };
+  const app = document.getElementById('app-root');
+  app.innerHTML = `
+  <div class="page-enter flex min-h-screen">
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar w-60 shrink-0 hidden lg:flex flex-col sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
+      <div class="p-4">
+        <p class="text-xs font-bold uppercase tracking-widest text-muted mb-3">Admin</p>
+        <nav class="space-y-0.5">
+          ${adminNav.map(n=>`
+            <button onclick="navigate('/admin/${n.key}')" class="flex items-center gap-3 w-full text-left px-3 py-2.5 rounded-lg text-sm transition-colors ${section===n.key?'nav-active-bg text-primary':'text-muted hover:bg-surface-alt hover:text-white'}" style="${section===n.key?'color:var(--color-primary-light);':''}">
+              <i class="fa-solid ${n.icon} w-4"></i>${n.label}
+            </button>`).join('')}
+          <hr class="my-3" style="border-color:var(--color-border);" />
+          <button onclick="adminLogout()" class="flex items-center gap-3 w-full text-left px-3 py-2.5 rounded-lg text-sm text-muted hover:text-red-400 transition-colors">
+            <i class="fa-solid fa-arrow-right-from-bracket w-4"></i>Logout
+          </button>
+        </nav>
+      </div>
+    </aside>
+    <!-- Admin Mobile Top Bar -->
+    <div class="lg:hidden fixed top-16 left-0 right-0 z-200 glass border-b overflow-x-auto" style="border-color:var(--color-border);z-index:200;">
+      <div class="flex gap-1 p-2">
+        ${adminNav.map(n=>`<button onclick="navigate('/admin/${n.key}')" class="btn btn-ghost btn-sm shrink-0 text-xs ${section===n.key?'nav-active-bg':''}"><i class="fa-solid ${n.icon}"></i><span class="hidden sm:block">${n.label}</span></button>`).join('')}
+      </div>
+    </div>
+    <!-- Admin Content -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 pt-4 lg:pt-8 mt-12 lg:mt-0 overflow-x-hidden">
+      <div class="max-w-6xl">
+        ${renderAdminSection(section)}
+      </div>
+    </main>
+  </div>`;
+}
+
+function renderAdminLogin() {
+  setSEO({ title:`Admin Login — ${SITE.name}`, robots:'noindex' });
+  document.getElementById('app-root').innerHTML = `
+  <div class="page-enter flex items-center justify-center min-h-screen px-4">
+    <div class="glass rounded-2xl border p-8 w-full max-w-sm" style="border-color:var(--color-border);">
+      <h1 class="font-heading font-bold text-2xl mb-1 text-center">Admin Access</h1>
+      <p class="text-muted text-sm text-center mb-6">Demo: password is <code>admin123</code></p>
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div><label class="form-label">Password</label><input type="password" name="password" class="form-input" placeholder="Enter admin password" required /></div>
+        <button type="submit" class="btn btn-primary w-full justify-center">Login</button>
+      </form>
+      <p class="text-muted text-xs text-center mt-4">⚠️ Configure a secure admin password in production via server-side secrets.</p>
+    </div>
+  </div>`;
+}
+
+function handleAdminLogin(e) {
+  e.preventDefault();
+  const pw = e.target.password.value;
+  // DEMO ONLY — in production, use server-side auth
+  if (pw === 'admin123') {
+    sessionStorage.setItem('gwm_admin','true');
+    navigate('/admin/dashboard');
+    showToast('Welcome to Admin','success');
+  } else {
+    showToast('Invalid password','error');
+  }
+}
+
+function adminLogout() {
+  sessionStorage.removeItem('gwm_admin');
+  navigate('/');
+  showToast('Logged out','info');
+}
+
+function renderAdminDocs() {
+  return `
+  <h2 class="font-heading font-bold text-2xl mb-6">Developer Documentation</h2>
+  <div class="space-y-6 max-w-4xl article-body">
+    ${[
+      { title:'A. Starting a New Website', body:'1. Duplicate this project.<br>2. Update SITE config (name, url, colors, email, social links).<br>3. Update FEATURES flags to enable/disable modules.<br>4. Replace demo content in DB with real content.<br>5. Configure backend secrets.<br>6. Update legal pages with real company information.' },
+      { title:'B. Where Branding is Configured', body:'All branding is in the <code>SITE</code> object at the top of the script. Change name, shortName, logoMark, primaryColor, secondaryColor, accentColor, bgColor, tagline, description.' },
+      { title:'C. Where Navigation is Configured', body:'Edit the <code>NAV_LINKS</code> array. Each entry has label, route, icon, bottomNav (boolean) and optional feature flag.' },
+      { title:'D. Where Feature Flags are Configured', body:'Edit the <code>FEATURES</code> object. Set any feature to false to hide it from navigation and disable its pages.' },
+      { title:'E. How to Add a New Content Item', body:'Add an entry to <code>DB.items</code>. Each item supports: id, name, slug, category, tagline, shortDescription, longDescription, features, platforms, languages, playStore, appStore, coverImage, icon, rating, reviews, faq, seo fields.' },
+      { title:'F. How to Configure Database/Backend', body:'Connect OnSpace Cloud. Create tables matching the DB schema: items, categories, blog_articles, videos, newsletter_subscribers, contact_messages, analytics_events. Replace DB.items/articles/videos reads with Supabase SDK calls from edge functions.' },
+      { title:'G. Which Secrets Need to be Configured', body:'Per-site secrets (never shared between sites):<br>• SUPABASE_URL<br>• SUPABASE_ANON_KEY<br>• SUPABASE_SERVICE_ROLE_KEY<br>• EMAIL_PROVIDER_API_KEY<br>• GA4_MEASUREMENT_ID<br>• ADMIN_PASSWORD_HASH<br>• CLOUDFLARE_STREAM_TOKEN (if videos)' },
+      { title:'H. How Blog Works', body:'Articles are stored in <code>DB.articles</code> (or database). Each article has: slug, title, author, publishDate, body (HTML), seo fields, faq, relatedArticles, tags. Route: /blog/[slug]. Schema: BlogPosting JSON-LD.' },
+      { title:'I. How Videos Work', body:'Videos are stored in <code>DB.videos</code> (or database). Each video has: slug, title, videoUrl, cloudflareStreamId, thumbnail, description, seo fields. Route: /videos/[slug]. Supports Reels view with IntersectionObserver autoplay.' },
+      { title:'J. How Admin Works', body:'Admin at /admin requires session auth (sessionStorage in demo; use real server auth in production). Sections: Dashboard, Items, Articles, Videos, Newsletter, Messages, Analytics, SEO, Settings, Docs.' },
+      { title:'K. How SEO/Sitemap Works', body:'Each page calls <code>setSEO()</code> with title, description, canonical, jsonLd. Structured data injected as &lt;script type="application/ld+json"&gt;. /sitemap page lists all routes. For production, add /sitemap.xml edge function returning XML with all slugs and lastmod dates.' },
+      { title:'L. What MUST NOT be Shared Between Sites', body:'• Database (every site gets its own)<br>• Supabase project and credentials<br>• Admin passwords<br>• Analytics IDs<br>• Email provider keys<br>• Cloudflare tokens<br>• Domain configuration' },
+    ].map(d=>`
+      <div class="glass rounded-xl border p-5" style="border-color:var(--color-border);">
+        <h3 class="font-heading font-bold text-base mb-2">${d.title}</h3>
+        <p class="text-muted text-sm">${d.body}</p>
+      </div>`).join('')}
+  </div>`;
+}
+
+/* ==============================================================
+   11. SEARCH ENGINE
+   ============================================================== */
+function globalSearch(q) {
+  const lq = q.toLowerCase();
+  const results = [];
+  DB.items.forEach(i => {
+    if ((i.name+' '+i.tagline+' '+i.shortDescription).toLowerCase().includes(lq))
+      results.push({ type:'App', typeBadge:'badge-primary', title:i.name, excerpt:i.tagline, route:`/explore/${i.slug}` });
+  });
+  DB.articles.forEach(a => {
+    if ((a.title+' '+a.excerpt).toLowerCase().includes(lq))
+      results.push({ type:'Article', typeBadge:'badge-secondary', title:a.title, excerpt:a.excerpt, route:`/blog/${a.slug}` });
+  });
+  DB.videos.forEach(v => {
+    if ((v.title+' '+v.description).toLowerCase().includes(lq))
+      results.push({ type:'Video', typeBadge:'badge-accent', title:v.title, excerpt:v.description, route:`/videos/${v.slug}` });
+  });
+  DB.categories.forEach(c => {
+    if (c.name.toLowerCase().includes(lq))
+      results.push({ type:'Category', typeBadge:'badge-muted', title:c.name, excerpt:`Browse all ${c.name} content`, route:`/category/${c.slug}` });
+  });
+  return results.slice(0,20);
+}
+
+function liveSearch(q) {
+  if (!q.trim()) { document.getElementById('search-results').innerHTML=''; return; }
+  Analytics.search(q);
+  const results = globalSearch(q);
+  const container = document.getElementById('search-results');
+  container.innerHTML = results.length
+    ? results.map(r=>`
+      <div class="flex gap-3 items-start p-3 rounded-lg hover:bg-surface-alt cursor-pointer transition-colors" onclick="closeSearch();navigate('${r.route}')" style="">
+        <span class="badge ${r.typeBadge} text-xs mt-0.5 shrink-0">${r.type}</span>
+        <div>
+          <p class="font-semibold text-sm">${highlight(r.title,q)}</p>
+          <p class="text-muted text-xs">${highlight(r.excerpt.substring(0,80),q)}…</p>
+        </div>
+      </div>`).join('')
+    : `<div class="text-center py-8 text-muted text-sm">${t('noResults')}</div>`;
+}
+
+function highlight(text, q) {
+  if (!q) return escapeHtml(text);
+  return escapeHtml(text).replace(new RegExp(`(${escapeRegex(q)})`, 'gi'), '<mark class="bg-primary/30 text-white rounded px-0.5">$1</mark>');
+}
+
+/* ==============================================================
+   12. FORM HANDLERS
+   ============================================================== */
+function handleNewsletter(e) {
+  e.preventDefault();
+  const email = e.target.email.value.trim();
+  if (DB.newsletter_subscribers.find(s=>s.email===email)) {
+    showToast('You are already subscribed!', 'info'); return;
+  }
+  DB.newsletter_subscribers.push({ email, date:new Date().toISOString().split('T')[0] });
+  Analytics.newsletterSignup();
+  showToast('🎉 Successfully subscribed!', 'success');
+  e.target.reset();
+}
+
+function handleContact(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  DB.contact_messages.push({
+    name: fd.get('name'), email: fd.get('email'),
+    subject: fd.get('subject'), message: fd.get('message'),
+    date: new Date().toISOString().split('T')[0]
+  });
+  Analytics.contactSubmit();
+  showToast('Message sent! We\'ll be in touch soon.', 'success');
+  e.target.reset();
+}
+
+/* ==============================================================
+   13. NAV RENDERING
+   ============================================================== */
+function renderNavs() {
+  const activeLinks = NAV_LINKS.filter(l => !l.feature || FEATURES[l.feature]);
+
+  // Desktop nav
+  const dNav = document.getElementById('desktop-nav');
+  if (dNav) dNav.innerHTML = activeLinks.map(l=>`
+    <a onclick="navigate('${l.route}')" data-route="${l.route}"
+       class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium transition-colors text-muted hover:text-white hover:bg-surface-alt cursor-pointer">
+      ${l.label}
+    </a>`).join('') + (FEATURES.admin ? `<a onclick="navigate('/admin')" class="nav-link px-3.5 py-2 rounded-lg text-sm font-medium transition-colors text-muted hover:text-white hover:bg-surface-alt cursor-pointer ml-2">Admin</a>` : '');
+
+  // Mobile nav
+  const mNav = document.getElementById('mobile-nav-links');
+  if (mNav) mNav.innerHTML = activeLinks.map(l=>`
+    <a onclick="navigate('${l.route}');closeMobileMenu();" data-route="${l.route}"
+       class="nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors text-muted hover:text-white hover:bg-surface cursor-pointer">
+      <i class="fa-solid ${l.icon} w-5"></i>${l.label}
+    </a>`).join('') + (FEATURES.admin ? `<a onclick="navigate('/admin');closeMobileMenu();" class="nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium text-muted hover:text-white hover:bg-surface cursor-pointer"><i class="fa-solid fa-lock w-5"></i>Admin</a>` : '');
+
+  // Bottom nav
+  if (FEATURES.bottomNav) {
+    const bNav = document.getElementById('bottom-nav-items');
+    const bottomLinks = activeLinks.filter(l=>l.bottomNav);
+    if (bNav) bNav.innerHTML = bottomLinks.map(l=>`
+      <button onclick="navigate('${l.route}')" data-route="${l.route}" class="bottom-nav-item ${currentRoute===l.route?'active':''}">
+        <i class="fa-solid ${l.icon}"></i>
+        <span>${l.label}</span>
+      </button>`).join('');
+  } else {
+    document.getElementById('bottom-nav')?.style && (document.getElementById('bottom-nav').style.display='none');
+  }
+
+  // Branding
+  ['logo-mark','mobile-logo-mark'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=SITE.logoMark; });
+  ['nav-site-name','mobile-site-name'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=SITE.name; });
+  ['header-cta','mobile-cta'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=SITE.headerCTA.label; });
+  if (!FEATURES.announcements) document.getElementById('announcement-bar')?.style && (document.getElementById('announcement-bar').style.display='none');
+}
+
+function updateActiveNav() {
+  document.querySelectorAll('.nav-link, .bottom-nav-item').forEach(el => {
+    const route = el.getAttribute('data-route') || el.getAttribute('onclick')?.match(/navigate\('([^']+)'\)/)?.[1];
+    const isActive = route === currentRoute || (currentRoute.startsWith(route) && route !== '/');
+    el.classList.toggle('nav-active', isActive);
+    if (el.classList.contains('bottom-nav-item')) el.classList.toggle('active', isActive);
+  });
+}
+
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+/* ==============================================================
+   14. SEARCH MODAL
+   ============================================================== */
+function openSearch() {
+  document.getElementById('search-modal').classList.remove('hidden');
+  setTimeout(()=>document.getElementById('search-input')?.focus(), 100);
+}
+function closeSearch() {
+  document.getElementById('search-modal').classList.add('hidden');
+}
+function closeSearchOnBackdrop(e) {
+  if (e.target.id==='search-modal') closeSearch();
+}
+function handleSearchKey(e) {
+  if (e.key==='Escape') closeSearch();
+  if (e.key==='Enter') {
+    const q = document.getElementById('search-input')?.value?.trim();
+    if (q) { closeSearch(); navigate('/search?q='+encodeURIComponent(q)); }
+  }
+}
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key==='k') { e.preventDefault(); openSearch(); }
+  if (e.key==='Escape') closeSearch();
+});
+
+/* ==============================================================
+   15. UI HELPERS
+   ============================================================== */
+function showToast(msg, type='info') {
+  const colors = { success:'#22c55e', error:'#ef4444', info:SITE.primaryColor };
+  const toast = document.createElement('div');
+  toast.className = 'px-5 py-3 rounded-xl text-white text-sm font-semibold shadow-lg mb-2 transition-all pointer-events-auto';
+  toast.style.cssText = `background:${colors[type]||colors.info};max-width:320px;opacity:0;transform:translateY(10px);`;
+  toast.textContent = msg;
+  document.getElementById('toast-container').appendChild(toast);
+  requestAnimationFrame(()=>{ toast.style.opacity='1'; toast.style.transform='translateY(0)'; });
+  setTimeout(()=>{ toast.style.opacity='0'; setTimeout(()=>toast.remove(), 300); }, 3500);
+}
+
+function toggleFaq(i) {
+  const ans = document.getElementById('faq-ans-'+i);
+  const icon = document.querySelector('.faq-icon-'+i);
+  if (!ans) return;
+  ans.classList.toggle('open');
+  icon?.style && (icon.style.transform = ans.classList.contains('open') ? 'rotate(180deg)' : '');
+}
+
+function animateStats() {
+  document.querySelectorAll('[data-target]').forEach(el => {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1200;
+    const start = performance.now();
+    const update = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const val = target * ease;
+      el.textContent = (val >= 10 ? Math.round(val) : val.toFixed(1)) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { requestAnimationFrame(update); obs.disconnect(); }
+    }, { threshold: 0.3 });
+    obs.observe(el);
+  });
+}
+
+function setupIntersectionPlayback() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const vid = entry.target.querySelector('video');
+      if (!vid) return;
+      if (entry.isIntersecting) vid.play().catch(()=>{});
+      else { vid.pause(); }
+    });
+  }, { threshold: 0.7 });
+  document.querySelectorAll('.reel-item').forEach(el => obs.observe(el));
+}
+
+function togglePlay(vidId) {
+  const vid = document.getElementById('video-'+vidId);
+  const icon = document.getElementById('play-icon-'+vidId);
+  if (!vid) return;
+  if (vid.paused) { vid.play(); icon.style.opacity='0'; }
+  else { vid.pause(); icon.style.opacity='1'; }
+}
+
+function toggleMute(vidId) {
+  const vid = document.getElementById('video-'+vidId);
+  const btn = document.getElementById('mute-btn-'+vidId);
+  if (!vid) return;
+  vid.muted = !vid.muted;
+  btn.innerHTML = vid.muted
+    ? '<i class="fa-solid fa-volume-xmark text-white text-sm"></i>'
+    : '<i class="fa-solid fa-volume-high text-white text-sm"></i>';
+}
+
+/* ==============================================================
+   16. UTILS
+   ============================================================== */
+function getCategoryName(id) {
+  return DB.categories.find(c=>c.id===id)?.name || 'Uncategorized';
+}
+function formatDate(str) {
+  if (!str) return '';
+  try { return new Date(str).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}); }
+  catch(e) { return str; }
+}
+function slugify(str) {
+  return str.toLowerCase().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim();
+}
+function escapeHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+}
+
+/* ==============================================================
+   17. BOOT
+   ============================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  // Apply theme tokens from SITE config
+  document.documentElement.style.setProperty('--color-primary',      SITE.primaryColor);
+  document.documentElement.style.setProperty('--color-secondary',    SITE.secondaryColor);
+  document.documentElement.style.setProperty('--color-accent',       SITE.accentColor);
+  document.documentElement.style.setProperty('--color-bg',           SITE.bgColor);
+
+  // Render navs
+  renderNavs();
+
+  // Determine initial route
+  const initRoute = location.hash.replace('#','') || '/';
+  navigate(initRoute, false);
+});
+</script>
+<script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
+
+
+
+</body></html>
